@@ -14,6 +14,7 @@ export default async function AuthLayout({
    if (session) {
       return redirect("/")
    }
+   
    return (
       <main>
          <div className="h-screen flex flex-col items-center justify-center">

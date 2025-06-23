@@ -29,7 +29,7 @@ export default async function Navbar() {
                         </Button>
                      </SignOutForm>
                   </>
-               ) : (
+               ) : ( 
                   <>
                      <Link
                         href="/sign-in"
