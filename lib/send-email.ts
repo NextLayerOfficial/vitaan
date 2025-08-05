@@ -9,7 +9,7 @@ export async function sendEmail({
   subject: string;
   text: string;
 }) {
-  var transport = nodemailer.createTransport({
+  const transport = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
     port: 2525,
     auth: {

@@ -1,6 +1,6 @@
 import React from "react";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="h-screen w-screen flex justify-center items-center">
       Check your email for the verification link.

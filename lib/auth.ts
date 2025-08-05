@@ -30,10 +30,7 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: null,
       },
-      // socials: {
-      //   type: "",
-      //   defaultValue: null,
-      // },
+
       instagram: { type: "string", defaultValue: "" },
       facebook: { type: "string", defaultValue: "" },
       linkedin: { type: "string", defaultValue: "" },
@@ -42,7 +39,7 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: null,
       },
-      
+
       phone: {
         type: "string",
         defaultValue: null,
@@ -52,7 +49,7 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
-    sendResetPassword: async ({ user, url, token }, request) => {
+    sendResetPassword: async ({ user, url }, request) => {
       await sendEmail({
         to: user.email,
         subject: "Reset your password",

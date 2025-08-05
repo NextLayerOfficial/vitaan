@@ -242,4 +242,3 @@ export const FoundingEthosSection = () => {
 };
 
 export default FoundingEthosSection;
-import Image from "next/image";

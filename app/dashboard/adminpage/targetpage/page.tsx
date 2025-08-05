@@ -6,7 +6,7 @@ import UserProfile from "@/components/userProfile";
 import { User } from "@/lib/types";
 import UserProfileSkeleton from "@/components/ui/UserProfileSkeleton";
 
-export default function page() {
+export default function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const [user, setUser] = useState<User | null>(null);
