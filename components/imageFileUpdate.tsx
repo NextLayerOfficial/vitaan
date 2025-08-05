@@ -121,6 +121,7 @@ export default function UserImageUpload({
       if (!uploadRes.ok) throw new Error("Upload failed");
 
       onUploadSuccess(publicUrl);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Upload error");
     } finally {

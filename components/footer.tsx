@@ -11,6 +11,7 @@ export default function Footer() {
         className="text-base text-[#5A3F2B] italic"
         style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
       >
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
         "जहाँ मन भयमुक्त हो और मस्तक ऊँचा उठे।" – रवीन्द्रनाथ ठाकुर
       </p>
     </footer>

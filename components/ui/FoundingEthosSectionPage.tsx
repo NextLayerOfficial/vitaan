@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react/jsx-key */
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -44,6 +45,10 @@ const pillarsData = [
 ];
 
 const VedicGlyph = ({ index }: { index: number }) => {
+  {
+    /* eslint-disable-next-line react/jsx-key */
+  }
+
   const glyphs = [
     // Satya - Lotus of Truth
     <svg viewBox="0 0 40 40" className="w-12 h-12">

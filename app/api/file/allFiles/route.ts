@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
     const skip = (currentPage - 1) * itemsPerPage;
 
     // Build the where clause
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: any = {};
 
     if (category) {

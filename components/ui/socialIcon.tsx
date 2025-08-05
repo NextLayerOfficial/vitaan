@@ -15,6 +15,8 @@ interface SocialIconProps {
   className?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const socialIconMap: Record<string, React.ComponentType<any>> = {
   github: Github,
   linkedin: Linkedin,

@@ -1,6 +1,5 @@
 "use client";
 
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -46,7 +45,8 @@ export default function SignUpForm() {
         email,
         password,
         name,
-        // @ts-expect-error
+
+        // @ts-expect-error: temporary fix for type issue with form library
         secret,
         username,
       },
@@ -75,7 +75,6 @@ export default function SignUpForm() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-     
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField

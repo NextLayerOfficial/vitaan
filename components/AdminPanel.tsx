@@ -184,6 +184,7 @@ export default function AdminPanel() {
             ) : (
               <tr>
                 <td colSpan={6} className="p-8 text-center text-gray-500">
+                  {/* eslint-disable-next-line react/no-unescaped-entities */}
                   No users found matching "{searchQuery}"
                 </td>
               </tr>
