@@ -82,9 +82,16 @@ export const auth = betterAuth({
         text: `Click the link to verify your email: ${url}profileComplete`,
       });
     },
+    async afterEmailVerification(user: { email: any }, request: any) {
+      return Response.redirect(
+        `${process.env.BETTER_AUTH_URL}/profileComplete`,
+        302
+      );
+    },
     sendOnSignUp: true,
     autoSignInAfterVerification: false,
   },
+
   rateLimit: {
     window: 60, // time window in seconds
     max: 10,
