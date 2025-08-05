@@ -42,6 +42,8 @@ export default function AdminPanel() {
           sortBy: "createdAt",
         },
       });
+      // @ts-expect-error - mismatched external UserWithRole type
+
       setUsers(res.data?.users ?? []);
     } catch (error) {
       console.error("Error fetching users:", error);

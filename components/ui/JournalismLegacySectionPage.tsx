@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useInView } from "framer-motion";
+import { Easing, motion, useInView } from "framer-motion";
 import { Calendar, BookOpen, Award, Users } from "lucide-react";
 
 interface Milestone {
@@ -86,7 +86,7 @@ const milestoneVariants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: [0.42, 0, 0.58, 1] as Easing, // ✅ This is a cubic bezier easing
     },
   },
 };
@@ -97,7 +97,7 @@ const iconVariants = {
     scale: 1,
     rotate: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 200,
       damping: 15,
       delay: 0.3,
@@ -111,7 +111,7 @@ const lineVariants = {
     scaleY: 1,
     transition: {
       duration: 1.5,
-      ease: "easeInOut",
+      ease: [0.42, 0, 0.58, 1] as Easing, // ✅ fix: cast to Easing
     },
   },
 };
@@ -129,7 +129,7 @@ export const JournalismLegacySection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: [0.42, 0, 0.58, 1] }}
           className="text-center mb-16"
         >
           <h2

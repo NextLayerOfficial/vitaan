@@ -4,9 +4,10 @@ import prisma from "@/lib/prisma";
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  // { params }: { params: { id: string } }
+  context: any
 ) {
-  const userId = params.id;
+  const userId = context?.params?.id;
   const body = await req.json();
 
   try {
