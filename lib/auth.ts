@@ -83,7 +83,7 @@ export const auth = betterAuth({
       });
     },
     sendOnSignUp: true,
-    autoSignInAfterVerification: true,
+    autoSignInAfterVerification: false,
   },
   rateLimit: {
     window: 60, // time window in seconds
