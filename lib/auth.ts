@@ -9,6 +9,7 @@ import {
 } from "better-auth/plugins";
 import { sendEmail } from "./send-email";
 
+//some changes
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
