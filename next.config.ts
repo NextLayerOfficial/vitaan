@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.googleusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "yash-vitaan-nextlayer-test.s3.ap-south-1.amazonaws.com",
+        pathname: "/**",
+      },
     ],
   },
   eslint: {
