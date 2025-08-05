@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { signInFormSchema } from "@/lib/auth-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -36,6 +36,8 @@ export default function SignInForm() {
     },
   });
 
+  const router = useRouter();
+
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
     const { email, password } = values;
     await authClient.signIn.email(
@@ -47,9 +49,35 @@ export default function SignInForm() {
         onRequest: () => {
           toast("Signing in...");
         },
-        onSuccess: () => {
+        // onSuccess: () => {
+        //   form.reset();
+        //   redirect("/dashboard");
+        // },
+        onSuccess: async () => {
           form.reset();
-          redirect("/dashboard");
+
+          // 🔄 Call API to get user profile
+          const res = await fetch("/api/me");
+          const user = await res.json();
+
+          const requiredFields = [
+            "graduationYear",
+            "department",
+            "currentCompany",
+            "jobTitle",
+            "address",
+            "phone",
+          ];
+
+          const isProfileComplete = requiredFields.every(
+            (field) => user[field] !== null && user[field] !== ""
+          );
+
+          if (!isProfileComplete) {
+            router.push("/profileComplete");
+          } else {
+            router.push("/dashboard");
+          }
         },
         onError: (ctx) => {
           toast.error(ctx.error.message);
@@ -67,7 +95,6 @@ export default function SignInForm() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-   
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
