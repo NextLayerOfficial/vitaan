@@ -9,7 +9,6 @@ export default function Home() {
     <main className="flex-1 bg-ivory ">
       <HeroSection />
       <JournalismLegacySection />
-
       <RegionalLiteratureMap />
       <FoundingEthosSection />
       <CulturalQuotesSection />
