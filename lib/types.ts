@@ -7,11 +7,11 @@ export interface User {
   username: string;
   displayUsername: string;
   banned?: boolean; // default is false
-  banReason?: string;
-  banExpires?: Date;
+  banReason?: string | null; // null if not banned
+  banExpires?: Date | null; // null if not banned
   graduationYear?: number;
   department?: string;
-  socials?: Record<string, any>; // or a more specific object type if known
+  socials?: Record<string, any> | null; // or a more specific object type if known
   currentCompany?: string;
   jobTitle?: string;
   phone?: string;

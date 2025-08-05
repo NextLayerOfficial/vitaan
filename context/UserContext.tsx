@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import type { User } from "@/lib/types";
 import { createContext, useContext } from "react";
@@ -6,15 +6,16 @@ import { createContext, useContext } from "react";
 const UserContext = createContext<User | null>(null);
 
 export const UserProvider = ({
-   user,
-   children,
+  user,
+  children,
 }: {
-   user: User | null;
-   children: React.ReactNode;
+  user: User | null;
+  children: React.ReactNode;
 }) => {
-   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  console.log("User in context:", user);
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => {
-   return useContext(UserContext);
+  return useContext(UserContext);
 };

@@ -3,76 +3,86 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Check, Clock, Mail, MapPin, Shield } from "lucide-react";
-import { useUser } from "@/context/UserContext";
-import { useEffect } from "react";
+import { Mail, MapPin, Shield, Briefcase } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { User } from "@/lib/types";
 
-export default function ProfileCard() {
-  const user = useUser();
-  useEffect(() => {
-    if (!user) {
-      console.error("User data is not available");
-    } else {
-      console.log("User data:", user);
-    }
-  }, [user]);
+export default function ProfileCard({ user }: { user?: User }) {
+  const router = useRouter();
+
+  const handleClick = ({ userid }: { userid: string | undefined }) => {
+    router.push(`/dashboard/allUsers/userprofile?id=${userid}`);
+  };
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden border border-gray-200 shadow-sm rounded-xl">
+      {/* Banner and avatar */}
       <CardHeader className="relative p-0">
-        <div className="h-32 bg-gradient-to-r from-primary/20 to-primary/40"></div>
-        <div className="absolute -bottom-12 left-4">
-          <div className="relative">
-            <Avatar className="h-24 w-24 border-4 border-background">
-              <AvatarImage src={user?.image || ""} alt="John Doe" />
-              <AvatarFallback className="text-6xl font-bold">
-                {user?.name.charAt(0)}
-              </AvatarFallback>
-            </Avatar>
-          </div>
+        <div className="h-32 bg-gradient-to-r from-blue-100 to-indigo-100" />
+        <div className="absolute -bottom-12 left-6">
+          <Avatar className="h-24 w-24 border-4 border-white shadow-md">
+            <AvatarImage
+              src={user?.image || ""}
+              alt={user?.name || "User"}
+              className="object-cover"
+            />
+            <AvatarFallback className="text-4xl font-semibold bg-muted text-muted-foreground">
+              {user?.name?.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
         </div>
       </CardHeader>
-      <CardContent className="pt-14">
-        <div className="space-y-1">
-          <h3 className="font-semibold text-xl">{user?.name}</h3>
-          <p className="text-sm text-muted-foreground">{user?.email}</p>
-          <p className="text-sm text-muted-foreground">{user?.address}</p>
-          <p className="text-sm text-muted-foreground">{user?.role}</p>
+
+      <CardContent className="pt-16 pb-6 px-6">
+        {/* Name and Company */}
+        <div className="space-y-1 mb-4">
+          <h3 className="text-xl font-semibold text-gray-900">
+            {user?.name || "Unknown User"}
+          </h3>
+          {user?.currentCompany && (
+            <div className="flex items-center text-sm text-gray-600 gap-2">
+              <Briefcase className="w-4 h-4 text-gray-400" />
+              <span>{user.currentCompany}</span>
+            </div>
+          )}
         </div>
-        <div className="flex items-center gap-2 mt-4">
-          <Badge variant="outline" className="flex items-center gap-1">
-            <Check className="h-3 w-3" />
-            {user?.emailVerified ? "Verified" : "Not Verified"}
-          </Badge>
-          <Badge variant="outline" className="flex items-center gap-1">
-            <Clock className="h-3 w-3" />
-            Member since {user?.createdAt.getFullYear()}
-          </Badge>
-        </div>
+
         <Separator className="my-4" />
-        <div className="space-y-4">
+
+        {/* Info rows */}
+        <div className="space-y-4 text-sm text-gray-700">
+          {user?.address && (
+            <div className="flex items-start gap-2">
+              <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />
+              <div>
+                <p className="font-medium">Location</p>
+                <p className="text-gray-500">{user.address}</p>
+              </div>
+            </div>
+          )}
+
+          {user?.email && (
+            <div className="flex items-start gap-2">
+              <Mail className="h-4 w-4 text-gray-400 mt-0.5" />
+              <div>
+                <p className="font-medium">Email</p>
+                <p className="text-gray-500">{user.email}</p>
+              </div>
+            </div>
+          )}
+
           <div className="flex items-start gap-2">
-            <MapPin className="h-4 w-4 text-muted-foreground mt-0.5" />
+            <Shield className="h-4 w-4 text-gray-400 mt-0.5" />
             <div>
-              <p className="text-sm font-medium">Location</p>
-              <p className="text-sm text-muted-foreground">New York, USA</p>
+              <p className="font-medium">Full Profile</p>
+              <button
+                className="text-blue-600 hover:underline transition"
+                onClick={() => handleClick({ userid: user?.id })}
+              >
+                View Details
+              </button>
             </div>
           </div>
-          <div className="flex items-start gap-2">
-            <Mail className="h-4 w-4 text-muted-foreground mt-0.5" />
-            <div>
-              <p className="text-sm font-medium">Email</p>
-              <p className="text-sm text-muted-foreground">{user?.email}</p>
-            </div>
-          </div>
-          {/* <div className="flex items-start gap-2">
-                  <Shield className="h-4 w-4 text-muted-foreground mt-0.5" />
-                  <div>
-                     <p className="text-sm font-medium">Account Security</p>
-                     <p className="text-sm text-muted-foreground">2FA Enabled</p>
-                  </div>
-               </div> */}
         </div>
       </CardContent>
     </Card>

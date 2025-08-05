@@ -3,6 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -41,6 +42,16 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --color-terracotta: #b7472a;
+  --color-ivory: #f7f5f1;
+  --color-muted-gold: #d4b896;
+  --color-indigo: #2e3a59;
+  --color-sandalwood: #c4a484;
+
+  --font-display: "Tiro Devanagari Sanskrit", serif;
+  --font-headings: "Noto Serif Indic", serif;
+  --font-body: "Source Sans 3", sans-serif;
 }
 
 :root {
@@ -76,6 +87,16 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --color-terracotta: #b7472a;
+  --color-ivory: #f7f5f1;
+  --color-muted-gold: #d4b896;
+  --color-indigo: #2e3a59;
+  --color-sandalwood: #c4a484;
+
+  --font-display: "Tiro Devanagari Sanskrit", serif;
+  --font-headings: "Noto Serif Indic", serif;
+  --font-body: "Source Sans 3", sans-serif;
 }
 
 .dark {

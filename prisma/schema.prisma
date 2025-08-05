@@ -11,42 +11,57 @@ model User {
   id              String    @id @default(uuid())
   email           String    @unique
   name            String?
-  role            String?   @default("user") // <-- Required
-  banned          Boolean?  @default(false) // <-- Required
-  banReason       String? // Optional
+  role            String?   @default("user")
+  banned          Boolean?  @default(false)
+  banReason       String?
   banExpires      DateTime?
-  username        String    @unique // required for plugin
-  displayUsername String // required for plugin
+  username        String    @unique
+  displayUsername String
   address         String?
   graduationYear  Int?
   department      String?
-  socials         Json? // For LinkedIn, Instagram, etc.
-  currentCompany  String? // Where they are currently working
-  jobTitle        String? // Their role/postion
-  phone           String? // Contact number
-  emailVerified   Boolean
+  socials         Json?
+  currentCompany  String?
+  jobTitle        String?
+  phone           String?
+  emailVerified   Boolean   @default(false)
   image           String?
   createdAt       DateTime
   updatedAt       DateTime
-  sessions        Session[]
   accounts        Account[]
+  File            File[]
+  sessions        Session[]
 
   @@map("user")
+}
+
+model File {
+  id        String   @id @default(uuid())
+  name      String
+  size      Int
+  type      String
+  key       String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("file")
 }
 
 model Session {
   id             String   @id
   expiresAt      DateTime
-  token          String
+  token          String   @unique
   createdAt      DateTime
   updatedAt      DateTime
   ipAddress      String?
   userAgent      String?
-  impersonatedBy String? // <-- Required for impersonation
+  impersonatedBy String?
   userId         String
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
   @@map("session")
 }
 
@@ -55,7 +70,6 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -65,6 +79,7 @@ model Account {
   password              String?
   createdAt             DateTime
   updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("account")
 }

@@ -2,7 +2,9 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import UserProfile, { User } from "@/components/userProfile";
+import UserProfile from "@/components/userProfile";
+import { User } from "@/lib/types";
+import UserProfileSkeleton from "@/components/ui/UserProfileSkeleton";
 
 export default function page() {
   const searchParams = useSearchParams();
@@ -32,8 +34,17 @@ export default function page() {
     setUser(data);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <UserProfileSkeleton />;
   if (!user) return <div>User not found</div>;
 
-  return <UserProfile user={user} isEditable={true} onSave={handleSave} />;
+  return (
+    <UserProfile
+      user={user}
+      isEditable={true}
+      refprop={undefined}
+      onSave={handleSave}
+      EditingRights={true} // Assuming you want to allow editing rights for this page
+    />
+  );
 }
+

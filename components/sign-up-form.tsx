@@ -21,7 +21,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { formSchema } from "@/lib/auth-schema";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -58,7 +57,7 @@ export default function SignUpForm() {
         },
         onSuccess: () => {
           form.reset();
-          redirect("/sign-in");
+          redirect("/sign-up/blank");
         },
         onError: (ctx) => {
           toast.error(ctx.error.message);

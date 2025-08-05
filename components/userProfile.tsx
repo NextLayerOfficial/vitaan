@@ -1,19 +1,358 @@
+// // "use client";
+
+// // // Import necessary hooks and icons from libraries
+// // import { useState } from "react";
+// // import {
+// //   Edit3,
+// //   Mail,
+// //   Phone,
+// //   MapPin,
+// //   GraduationCap,
+// //   Briefcase,
+// //   X,
+// //   Save,
+// //   Camera,
+// // } from "lucide-react";
+
+// // import { User } from "@/lib/types";
+// // import SocialIcon from "@/components/ui/socialIcon";
+
+// // // Props interface for user profile component
+// // export interface UserProfileProps {
+// //   user: User;
+// //   isEditable?: boolean;
+// //   onSave?: (userData: User) => void;
+// //   onCancel?: () => void;
+// //   EditingRights: boolean;
+// //   refprop: any;
+// // }
+
+// // const UserProfile: React.FC<UserProfileProps> = ({
+// //   user,
+// //   isEditable = false,
+// //   onSave,
+// //   onCancel,
+// //   EditingRights = false,
+// //   refprop,
+// // }) => {
+// //   const [editMode, setEditMode] = useState(isEditable);
+// //   const [editedUser, setEditedUser] = useState<User>(user);
+
+// //   // Save updated profile
+// //   const handleSave = () => {
+// //     onSave?.(editedUser);
+// //     setEditMode(false);
+// //   };
+
+// //   // Cancel editing and reset user state
+// //   const handleCancel = () => {
+// //     setEditedUser(user);
+// //     setEditMode(false);
+// //     onCancel?.();
+// //   };
+
+// //   // Handle individual field updates
+// //   const updateUser = (field: keyof User, value: any) => {
+// //     setEditedUser((prev) => ({ ...prev, [field]: value }));
+// //   };
+
+// //   // Style based on user role
+// //   const getRoleBadgeStyle = (role: string) => {
+// //     switch (role) {
+// //       case "admin":
+// //         return "bg-red-100 text-red-700 border border-red-200";
+// //       default:
+// //         return "bg-gray-100 text-gray-700 border border-gray-200";
+// //     }
+// //   };
+
+// //   const currentUser = editMode ? editedUser : user;
+
+// //   return (
+// //     <div className="mx-auto max-w-5xl p-6" ref={refprop}>
+// //       <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
+// //         {/* Header cover */}
+// //         {/* <div className="bg-gradient-to-r from-neutral-700 to-neutral-500 h-36 relative">
+// //           <div className="absolute inset-0 bg-black bg-opacity-10" />
+// //         </div> */}
+// //         <div
+// //           className="relative h-48 bg-[#F4E4BC] text-[#2F2F2F] flex items-center justify-center overflow-hidden before:absolute before:inset-0 before:bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22%23DAA520%22%20fill-opacity%3D%220.05%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M0%2040L40%200H20L0%2020M40%2040V20L20%2040%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')] before:opacity-40 before:z-0"
+// //           style={{
+// //             backgroundImage: `
+// //       radial-gradient(circle at 25% 25%, #DAA520 2%, transparent 0),
+// //       radial-gradient(circle at 75% 25%, #DAA520 2%, transparent 0),
+// //       radial-gradient(circle at 25% 75%, #DAA520 2%, transparent 0),
+// //       radial-gradient(circle at 75% 75%, #DAA520 2%, transparent 0)
+// //     `,
+// //             backgroundSize: "40px 40px",
+// //             backgroundPosition: "0 0, 20px 20px, 20px 20px, 0 0",
+// //           }}
+// //         >
+// //           <div className="relative z-10 text-center">
+// //             <h2 className="text-3xl font-serif font-bold text-[#8B4513]">
+// //               Profile
+// //             </h2>
+// //           </div>
+// //         </div>
+
+// //         <div className="relative px-6 pb-10">
+// //           {/* Profile Picture and Name Section */}
+// //           <div className="flex flex-col md:flex-row md:items-end md:space-x-6 -mt-16 relative z-10">
+// //             <div className="flex flex-col items-center md:items-start">
+// //               {/* Profile Image */}
+// //               <div className="relative group">
+// //                 <img
+// //                   src={currentUser.image ?? undefined}
+// //                   alt={currentUser.name}
+// //                   className="w-32 h-32 rounded-xl object-cover border-4 border-white shadow-sm"
+// //                 />
+// //                 {editMode && (
+// //                   <button className="absolute inset-0 bg-black bg-opacity-30 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+// //                     <Camera className="w-6 h-6 text-white" />
+// //                   </button>
+// //                 )}
+// //               </div>
+// //               <div className="mt-4 text-center md:text-left">
+// //                 {/* Name input or display */}
+// //                 {editMode ? (
+// //                   <input
+// //                     type="text"
+// //                     value={currentUser.name}
+// //                     onChange={(e) => updateUser("name", e.target.value)}
+// //                     className="text-2xl font-semibold text-gray-900 bg-transparent border-b border-gray-300 focus:outline-none focus:border-black"
+// //                   />
+// //                 ) : (
+// //                   <h1 className="text-2xl font-semibold text-gray-900">
+// //                     {currentUser.name}
+// //                   </h1>
+// //                 )}
+// //                 <p className="text-sm text-gray-500 mt-1">
+// //                   @{currentUser.displayUsername}
+// //                 </p>
+// //                 {/* Role Badge */}
+// //                 {/* <span
+// //                   className={`inline-block mt-2 px-3 py-1 text-sm rounded-full ${getRoleBadgeStyle(
+// //                     currentUser.role
+// //                   )}`}
+// //                 >
+// //                   {currentUser.role.charAt(0).toUpperCase() +
+// //                     currentUser.role.slice(1)}
+// //                 </span> */}
+// //               </div>
+// //             </div>
+
+// //             {/* Edit and Save buttons */}
+// //             <div className="flex-1 flex justify-end mt-6 md:mt-0">
+// //               {!editMode && EditingRights && (
+// //                 <button
+// //                   onClick={() => setEditMode(true)}
+// //                   className="px-4 py-2 bg-black text-white rounded-lg hover:bg-neutral-800"
+// //                 >
+// //                   <Edit3 className="w-4 h-4 mr-2 inline-block" /> Edit Profile
+// //                 </button>
+// //               )}
+// //               {editMode && (
+// //                 <div className="flex space-x-3">
+// //                   <button
+// //                     onClick={handleCancel}
+// //                     className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+// //                   >
+// //                     <X className="w-4 h-4 mr-2 inline-block" /> Cancel
+// //                   </button>
+// //                   <button
+// //                     onClick={handleSave}
+// //                     className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+// //                   >
+// //                     <Save className="w-4 h-4 mr-2 inline-block" /> Save Changes
+// //                   </button>
+// //                 </div>
+// //               )}
+// //             </div>
+// //           </div>
+
+// //           {/* Profile Info Grid */}
+// //           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+// //             {/* Sections */}
+// //             <InfoSection
+// //               title="Contact Information"
+// //               icon={<Mail className="w-5 h-5 text-neutral-700" />}
+// //             >
+// //               <InfoRow
+// //                 icon={<Mail className="text-gray-400" />}
+// //                 label={currentUser.email}
+// //                 editable={editMode}
+// //                 onChange={(val) => updateUser("email", val)}
+// //                 type="email"
+// //               />
+// //               <InfoRow
+// //                 icon={<Phone className="text-gray-400" />}
+// //                 label={currentUser.phone ?? ""}
+// //                 editable={editMode}
+// //                 onChange={(val) => updateUser("phone", val)}
+// //                 type="tel"
+// //               />
+// //               <InfoRow
+// //                 icon={<MapPin className="text-gray-400" />}
+// //                 label={currentUser.address ?? ""}
+// //                 editable={editMode}
+// //                 onChange={(val) => updateUser("address", val)}
+// //                 textarea
+// //               />
+// //             </InfoSection>
+
+// //             <InfoSection
+// //               title="Academic Information"
+// //               icon={<GraduationCap className="w-5 h-5 text-neutral-700" />}
+// //             >
+// //               <InfoRow
+// //                 label={String(currentUser.graduationYear)}
+// //                 editable={editMode}
+// //                 onChange={(val) => updateUser("graduationYear", parseInt(val))}
+// //                 type="number"
+// //                 prefix="Year:"
+// //               />
+// //               <InfoRow
+// //                 label={currentUser.department ?? ""}
+// //                 editable={editMode}
+// //                 onChange={(val) => updateUser("department", val)}
+// //                 prefix="Department:"
+// //               />
+// //             </InfoSection>
+
+// //             <InfoSection
+// //               title="Professional Information"
+// //               icon={<Briefcase className="w-5 h-5 text-neutral-700" />}
+// //             >
+// //               <InfoRow
+// //                 label={currentUser.currentCompany ?? ""}
+// //                 editable={editMode}
+// //                 onChange={(val) => updateUser("currentCompany", val)}
+// //                 prefix="Company:"
+// //               />
+// //               <InfoRow
+// //                 label={currentUser.jobTitle ?? ""}
+// //                 editable={editMode}
+// //                 onChange={(val) => updateUser("jobTitle", val)}
+// //                 prefix="Title:"
+// //               />
+// //             </InfoSection>
+
+// //             <InfoSection title="Social Links" icon={null}>
+// //               {currentUser.socials &&
+// //               Object.keys(currentUser.socials).length > 0 ? (
+// //                 <div className="grid grid-cols-2 gap-3">
+// //                   {Object.entries(currentUser.socials).map(
+// //                     ([platform, url]) => (
+// //                       <a
+// //                         key={platform}
+// //                         href={url}
+// //                         target="_blank"
+// //                         rel="noopener noreferrer"
+// //                         className="flex items-center p-3 bg-white rounded-md border border-gray-200 hover:shadow-sm hover:border-neutral-400"
+// //                       >
+// //                         <SocialIcon
+// //                           platform={platform}
+// //                           className="w-5 h-5 mr-3 text-gray-600"
+// //                         />
+// //                         <span className="text-sm font-medium text-gray-900 capitalize">
+// //                           {platform}
+// //                         </span>
+// //                       </a>
+// //                     )
+// //                   )}
+// //                 </div>
+// //               ) : (
+// //                 <p className="text-sm text-gray-500">
+// //                   No social links added yet.
+// //                 </p>
+// //               )}
+// //             </InfoSection>
+// //           </div>
+// //         </div>
+// //       </div>
+// //     </div>
+// //   );
+// // };
+
+// // // Info section layout component
+// // interface InfoSectionProps {
+// //   title: string;
+// //   icon: React.ReactNode;
+// //   children: React.ReactNode;
+// // }
+
+// // const InfoSection: React.FC<InfoSectionProps> = ({ title, icon, children }) => (
+// //   <section className="bg-gray-50 rounded-lg p-6 h-full flex flex-col justify-start">
+// //     <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+// //       {icon} {title}
+// //     </h2>
+// //     <div className="space-y-4">{children}</div>
+// //   </section>
+// // );
+
+// // // Info field row component
+// // interface InfoRowProps {
+// //   label: string;
+// //   editable: boolean;
+// //   onChange: (val: string) => void;
+// //   type?: string;
+// //   textarea?: boolean;
+// //   icon?: React.ReactNode;
+// //   prefix?: string;
+// // }
+
+// // const InfoRow: React.FC<InfoRowProps> = ({
+// //   label,
+// //   editable,
+// //   onChange,
+// //   type = "text",
+// //   textarea = false,
+// //   icon,
+// //   prefix,
+// // }) => (
+// //   <div className="flex items-start gap-3">
+// //     {icon && <div className="mt-1">{icon}</div>}
+// //     <div className="flex-1">
+// //       {editable ? (
+// //         textarea ? (
+// //           <textarea
+// //             rows={2}
+// //             value={label}
+// //             onChange={(e) => onChange(e.target.value)}
+// //             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent resize-none"
+// //           />
+// //         ) : (
+// //           <input
+// //             type={type}
+// //             value={label}
+// //             onChange={(e) => onChange(e.target.value)}
+// //             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+// //           />
+// //         )
+// //       ) : (
+// //         <p className="text-gray-900">
+// //           {prefix && <span className="font-medium mr-1">{prefix}</span>}
+// //           {label}
+// //         </p>
+// //       )}
+// //     </div>
+// //   </div>
+// // );
+
+// // export default UserProfile;
 "use client";
+
 import { useState } from "react";
 import {
   Edit3,
   Mail,
-  Phone,
-  MapPin,
   GraduationCap,
-  Building2,
   Briefcase,
-  CheckCircle,
-  X,
   Save,
+  X,
   Camera,
 } from "lucide-react";
-
+import { User } from "@/lib/types";
 import SocialIcon from "@/components/ui/socialIcon";
 
 export interface UserProfileProps {
@@ -21,23 +360,8 @@ export interface UserProfileProps {
   isEditable?: boolean;
   onSave?: (userData: User) => void;
   onCancel?: () => void;
-}
-
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  displayUsername: string;
-  role: "user" | "admin";
-  address: string;
-  graduationYear: number;
-  department: string;
-  socials: Record<string, string>;
-  currentCompany: string;
-  jobTitle: string;
-  phone: string;
-  emailVerified: boolean;
-  image: string;
+  EditingRights: boolean;
+  refprop?: any;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({
@@ -45,6 +369,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
   isEditable = false,
   onSave,
   onCancel,
+  EditingRights = false,
+  refprop,
 }) => {
   const [editMode, setEditMode] = useState(isEditable);
   const [editedUser, setEditedUser] = useState<User>(user);
@@ -64,321 +390,238 @@ const UserProfile: React.FC<UserProfileProps> = ({
     setEditedUser((prev) => ({ ...prev, [field]: value }));
   };
 
-  const getRoleBadgeStyle = (role: string) => {
-    switch (role) {
-      case "admin":
-        return "bg-red-100 text-red-800 border-red-200";
-      case "moderator":
-        return "bg-blue-100 text-blue-800 border-blue-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
-  };
-
   const currentUser = editMode ? editedUser : user;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
-        {/* Header with gradient background */}
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-32 relative">
-          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-        </div>
-
-        {/* Profile Content */}
-        <div className="relative px-6 pb-6">
-          {/* Avatar and basic info */}
-          <div className="flex flex-col md:flex-row md:items-end md:space-x-6 -mt-16 relative z-10">
-            <div className="flex flex-col items-center md:items-start">
-              <div className="relative group">
-                <img
-                  src={currentUser.image}
-                  alt={currentUser.name}
-                  className="w-32 h-32 rounded-2xl object-cover border-4 border-white shadow-xl"
-                />
-                {editMode && (
-                  <button className="absolute inset-0 bg-black bg-opacity-40 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <Camera className="w-8 h-8 text-white" />
-                  </button>
-                )}
-              </div>
-
-              <div className="mt-4 text-center md:text-left">
-                {editMode ? (
-                  <input
-                    type="text"
-                    value={currentUser.name}
-                    onChange={(e) => updateUser("name", e.target.value)}
-                    className="text-2xl font-bold text-gray-900 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-600"
-                  />
-                ) : (
-                  <h1 className="text-2xl font-bold text-gray-900">
-                    {currentUser.name}
-                  </h1>
-                )}
-
-                <div className="flex items-center justify-center md:justify-start mt-1">
-                  <span className="text-gray-500">
-                    @{currentUser.displayUsername}
-                  </span>
-                </div>
-
-                <div className="mt-2">
-                  <span
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${getRoleBadgeStyle(
-                      currentUser.role
-                    )}`}
-                  >
-                    {currentUser.role.charAt(0).toUpperCase() +
-                      currentUser.role.slice(1)}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Action buttons */}
-            <div className="flex-1 flex justify-end mt-4 md:mt-0">
-              {!editMode && (
-                <button
-                  onClick={() => setEditMode(true)}
-                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md"
-                >
-                  <Edit3 className="w-4 h-4 mr-2" />
-                  Edit Profile
+    <div className="max-w-5xl mx-auto p-6 space-y-6" ref={refprop}>
+      {/* Hero Header */}
+      <div className="bg-gradient-to-br from-[#F4E4BC] to-[#FFF8E7] p-6 rounded-b-2xl shadow">
+        <div className="flex flex-col md:flex-row items-center md:justify-between">
+          <div className="flex items-center gap-6">
+            <div className="relative group">
+              <img
+                src={currentUser.image ?? "/default-avatar.png"}
+                alt={currentUser.name}
+                className="w-28 h-28 rounded-xl object-cover border-4 border-white shadow"
+              />
+              {editMode && (
+                <button className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Camera className="text-white w-6 h-6" />
                 </button>
               )}
-
-              {editMode && (
-                <div className="flex space-x-3">
-                  <button
-                    onClick={handleCancel}
-                    className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-                  >
-                    <X className="w-4 h-4 mr-2" />
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleSave}
-                    className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md"
-                  >
-                    <Save className="w-4 h-4 mr-2" />
-                    Save Changes
-                  </button>
-                </div>
+            </div>
+            <div>
+              {editMode ? (
+                <input
+                  type="text"
+                  value={currentUser.name}
+                  onChange={(e) => updateUser("name", e.target.value)}
+                  className="text-3xl font-bold bg-transparent border-b border-gray-300 focus:outline-none focus:border-black "
+                  style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
+                />
+              ) : (
+                <h1 className="text-3xl font-bold text-[#8B4513] font-devanagari">
+                  {currentUser.name}
+                </h1>
               )}
+              <p className="text-gray-600">@{currentUser.displayUsername}</p>
+              <p
+                className="text-sm italic text-[#555] mt-1 "
+                style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
+              >
+                “सर्वे भवन्तु सुखिनः” — May all be happy.
+              </p>
             </div>
           </div>
 
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-            {/* Left Column */}
-            <div className="space-y-6">
-              {/* Basic Information */}
-              <section className="bg-gray-50 rounded-xl p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <Mail className="w-5 h-5 mr-2 text-blue-600" />
-                  Contact Information
-                </h2>
+          {EditingRights && !editMode && (
+            <button
+              onClick={() => setEditMode(true)}
+              className="mt-4 md:mt-0 px-4 py-2 bg-black text-white rounded-md hover:bg-neutral-800"
+            >
+              <Edit3 className="w-4 h-4 mr-2 inline-block" /> Edit Profile
+            </button>
+          )}
 
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <Mail className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" />
-                    <div className="flex-1">
-                      {editMode ? (
-                        <input
-                          type="email"
-                          value={currentUser.email}
-                          onChange={(e) => updateUser("email", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        />
-                      ) : (
-                        <span className="text-gray-900">
-                          {currentUser.email}
-                        </span>
-                      )}
-                      {currentUser.emailVerified && (
-                        <div className="flex items-center mt-1">
-                          <CheckCircle className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-sm text-green-600">
-                            Verified
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <Phone className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" />
-                    {editMode ? (
-                      <input
-                        type="tel"
-                        value={currentUser.phone}
-                        onChange={(e) => updateUser("phone", e.target.value)}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    ) : (
-                      <span className="text-gray-900">{currentUser.phone}</span>
-                    )}
-                  </div>
-
-                  <div className="flex items-start">
-                    <MapPin className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0 mt-0.5" />
-                    {editMode ? (
-                      <textarea
-                        value={currentUser.address}
-                        onChange={(e) => updateUser("address", e.target.value)}
-                        rows={2}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      />
-                    ) : (
-                      <span className="text-gray-900">
-                        {currentUser.address}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </section>
-
-              {/* Academic Information */}
-              <section className="bg-gray-50 rounded-xl p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <GraduationCap className="w-5 h-5 mr-2 text-purple-600" />
-                  Academic Information
-                </h2>
-
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <span className="text-gray-600 w-24 flex-shrink-0">
-                      Year:
-                    </span>
-                    {editMode ? (
-                      <input
-                        type="number"
-                        value={currentUser.graduationYear}
-                        onChange={(e) =>
-                          updateUser("graduationYear", parseInt(e.target.value))
-                        }
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    ) : (
-                      <span className="text-gray-900 font-medium">
-                        {currentUser.graduationYear}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-start">
-                    <span className="text-gray-600 w-24 flex-shrink-0">
-                      Department:
-                    </span>
-                    {editMode ? (
-                      <input
-                        type="text"
-                        value={currentUser.department}
-                        onChange={(e) =>
-                          updateUser("department", e.target.value)
-                        }
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    ) : (
-                      <span className="text-gray-900 font-medium">
-                        {currentUser.department}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </section>
+          {editMode && (
+            <div className="flex mt-4 md:mt-0 space-x-3">
+              <button
+                onClick={handleCancel}
+                className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+              >
+                <X className="w-4 h-4 mr-1 inline-block" /> Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              >
+                <Save className="w-4 h-4 mr-1 inline-block" /> Save Changes
+              </button>
             </div>
-
-            {/* Right Column */}
-            <div className="space-y-6">
-              {/* Professional Information */}
-              <section className="bg-gray-50 rounded-xl p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <Briefcase className="w-5 h-5 mr-2 text-green-600" />
-                  Professional Information
-                </h2>
-
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <Building2 className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" />
-                    {editMode ? (
-                      <input
-                        type="text"
-                        value={currentUser.currentCompany}
-                        onChange={(e) =>
-                          updateUser("currentCompany", e.target.value)
-                        }
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Company Name"
-                      />
-                    ) : (
-                      <span className="text-gray-900 font-medium">
-                        {currentUser.currentCompany}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-center">
-                    <Briefcase className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" />
-                    {editMode ? (
-                      <input
-                        type="text"
-                        value={currentUser.jobTitle}
-                        onChange={(e) => updateUser("jobTitle", e.target.value)}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Job Title"
-                      />
-                    ) : (
-                      <span className="text-gray-900 font-medium">
-                        {currentUser.jobTitle}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </section>
-
-              {/* Social Links */}
-              <section className="bg-gray-50 rounded-xl p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                  Social Links
-                </h2>
-
-                {currentUser.socials &&
-                Object.keys(currentUser.socials).length > 0 ? (
-                  <div className="grid grid-cols-2 gap-3">
-                    {Object.entries(currentUser.socials).map(
-                      ([platform, url]) => (
-                        <a
-                          key={platform}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center p-3 bg-white rounded-lg hover:shadow-md transition-shadow duration-200 border border-gray-200 hover:border-blue-300"
-                        >
-                          <SocialIcon
-                            platform={platform}
-                            className="w-5 h-5 mr-3 text-gray-600"
-                          />
-                          <span className="text-sm font-medium text-gray-900 capitalize">
-                            {platform}
-                          </span>
-                        </a>
-                      )
-                    )}
-                  </div>
-                ) : (
-                  <p className="text-gray-500 text-sm">
-                    No social links added yet
-                  </p>
-                )}
-              </section>
-            </div>
-          </div>
+          )}
         </div>
       </div>
+
+      {/* Academic & Professional */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <ProfileCard
+          title="शैक्षणिक जानकारी / Academic Info"
+          icon={<GraduationCap className="w-5 h-5" />}
+        >
+          <Field
+            label="Graduation Year"
+            value={String(currentUser.graduationYear)}
+            editable={false}
+            onChange={(val) => updateUser("graduationYear", parseInt(val))}
+          />
+          <Field
+            label="Department"
+            value={currentUser.department ?? ""}
+            editable={false}
+            onChange={(val) => updateUser("department", val)}
+          />
+        </ProfileCard>
+
+        <ProfileCard
+          title="पेशा / Professional Info"
+          icon={<Briefcase className="w-5 h-5" />}
+        >
+          <Field
+            label="Company"
+            value={currentUser.currentCompany ?? ""}
+            editable={editMode}
+            onChange={(val) => updateUser("currentCompany", val)}
+          />
+          <Field
+            label="Title"
+            value={currentUser.jobTitle ?? ""}
+            editable={editMode}
+            onChange={(val) => updateUser("jobTitle", val)}
+          />
+        </ProfileCard>
+      </div>
+
+      {/* Contact Info */}
+      <ProfileCard title="संपर्क / Contact" icon={<Mail className="w-5 h-5" />}>
+        <Field
+          label="Email"
+          value={currentUser.email}
+          editable={false}
+          onChange={(val) => updateUser("email", val)}
+          type="email"
+        />
+        <Field
+          label="Phone"
+          value={currentUser.phone ?? ""}
+          editable={editMode}
+          onChange={(val) => updateUser("phone", val)}
+          type="tel"
+        />
+        <Field
+          label="Address"
+          value={currentUser.address ?? ""}
+          editable={editMode}
+          onChange={(val) => updateUser("address", val)}
+          textarea
+        />
+      </ProfileCard>
+
+      {/* Socials */}
+      <ProfileCard title="सोशल मीडिया / Social Media">
+        {currentUser.socials && Object.keys(currentUser.socials).length > 0 ? (
+          <div className="grid grid-cols-2 gap-3">
+            {Object.entries(currentUser.socials).map(([platform, url]) => (
+              <a
+                key={platform}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center p-3 bg-white border border-gray-200 rounded-md hover:shadow-sm"
+              >
+                <SocialIcon
+                  platform={platform}
+                  className="w-5 h-5 mr-2 text-gray-600"
+                />
+                <span className="text-sm font-medium text-gray-900 capitalize">
+                  {platform}
+                </span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p
+            className="text-sm text-gray-500 "
+            style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
+          >
+            कोई लिंक नहीं जुड़े हैं।
+          </p>
+        )}
+      </ProfileCard>
     </div>
   );
 };
 
 export default UserProfile;
+
+// 🔹 Card Container
+const ProfileCard = ({
+  title,
+  icon,
+  children,
+}: {
+  title: string;
+  icon?: React.ReactNode;
+  children: React.ReactNode;
+}) => (
+  <div className="bg-[#FDF6E3] border-l-1 border-[#DAA520] p-6 rounded-xl shadow-sm space-y-3">
+    <h3
+      className="text-lg font-bold flex items-center gap-2 text-gray-800 "
+      style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
+    >
+      {icon} {title}
+    </h3>
+    {children}
+  </div>
+);
+
+// 🔹 Reusable Field
+const Field = ({
+  label,
+  value,
+  editable,
+  onChange,
+  type = "text",
+  textarea = false,
+}: {
+  label: string;
+  value: string;
+  editable: boolean;
+  onChange: (val: string) => void;
+  type?: string;
+  textarea?: boolean;
+}) => (
+  <div>
+    <p className="text-xs text-gray-600 mb-1">{label}</p>
+    {editable ? (
+      textarea ? (
+        <textarea
+          rows={2}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black resize-none"
+        />
+      ) : (
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black"
+        />
+      )
+    ) : (
+      <p className="text-gray-800">
+        {value || <span className="text-gray-400">—</span>}
+      </p>
+    )}
+  </div>
+);
