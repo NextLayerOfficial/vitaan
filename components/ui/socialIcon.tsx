@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import {
   Github,
@@ -16,7 +17,6 @@ interface SocialIconProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 const socialIconMap: Record<string, React.ComponentType<any>> = {
   github: Github,
   linkedin: Linkedin,

@@ -152,8 +152,7 @@ const QuoteCard = (quote: Quote) => {
                 : "var(--color-muted-gold)",
             }}
           >
-            {/* eslint-disable-next-line react/no-unescaped-entities */}"
-            {quote.translation}"
+            &quot;{quote.translation}&quot;
           </blockquote>
 
           <footer className="flex items-center gap-4 mt-auto">
