@@ -100,7 +100,13 @@ export default function FileDashboardPage() {
     };
 
     fetchFiles();
-  }, [searchParams, pagination.currentPage, categoryFilter]);
+  }, [
+    searchParams,
+    pagination.currentPage,
+    categoryFilter,
+    searchTerm,
+    pagination.itemsPerPage,
+  ]);
 
   // Update URL parameters when filters change
   const updateSearchParams = (params: { [key: string]: string }) => {

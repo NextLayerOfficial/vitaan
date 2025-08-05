@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Footer() {
   return (
     <footer className="bg-[#F9F5EF] text-[#4B2E13] py-12 px-4 text-center border-t border-[#e4dcd0] font-inter">

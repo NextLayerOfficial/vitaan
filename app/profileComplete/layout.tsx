@@ -1,6 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/app-sidebar";
-import AppHeader from "@/components/app-header";
+// import AppSidebar from "@/components/app-sidebar";
+// import AppHeader from "@/components/app-header";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";

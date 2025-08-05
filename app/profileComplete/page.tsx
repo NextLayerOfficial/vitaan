@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import UserImageUpload from "@/components/imageFileUpdate";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export type FormValues = {
   address: string;
@@ -125,8 +126,10 @@ export default function ProfilePage() {
             </div>
             {imageUrl && (
               <div className="mt-4 md:mt-0">
-                <img
+                <Image
                   src={imageUrl}
+                  width={800}
+                  height={800}
                   alt="Uploaded"
                   className="w-28 h-28 md:w-36 md:h-36 object-cover rounded-lg border"
                 />

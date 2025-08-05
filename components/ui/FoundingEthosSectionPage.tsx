@@ -6,31 +6,37 @@ import { useRef } from "react";
 
 const pillarsData = [
   {
+    id: 1,
     titleHindi: "सत्य",
     titleEnglish: "Satya (Truth)",
     description: "Unwavering commitment to authentic discourse",
   },
   {
+    id: 2,
     titleHindi: "स्वतंत्रता",
     titleEnglish: "Swatantrata (Freedom)",
     description: "Liberating minds through fearless expression",
   },
   {
+    id: 3,
     titleHindi: "उत्तरदायित्व",
     titleEnglish: "Uttardayitva (Responsibility)",
     description: "Media accountability for societal wellbeing",
   },
   {
+    id: 4,
     titleHindi: "संस्कृति",
     titleEnglish: "Sanskriti (Culture)",
     description: "Preserving heritage in modern narratives",
   },
   {
+    id: 5,
     titleHindi: "संवाद",
     titleEnglish: "Samvad (Dialogue)",
     description: "Building bridges through meaningful conversation",
   },
   {
+    id: 6,
     titleHindi: "स्मृति",
     titleEnglish: "Smriti (Memory)",
     description: "Honoring collective wisdom and remembrance",
@@ -187,16 +193,16 @@ export const FoundingEthosSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {pillarsData.map((pillar, index) => (
+          {pillarsData.map((pillar) => (
             <motion.div
-              key={index}
+              key={pillar.id}
               className="bg-card border border-sandalwood rounded-lg p-8 shadow-lg shadow-muted-gold/20 hover:shadow-xl hover:shadow-muted-gold/30 transition-all duration-300 relative overflow-hidden"
               style={{
                 background: "linear-gradient(135deg, #FAF9F6 0%, #F7F5F1 100%)",
               }}
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: pillar.id * 0.1 }}
               whileHover={{ y: -2 }}
             >
               <motion.div
@@ -208,7 +214,7 @@ export const FoundingEthosSection = () => {
 
               <div className="relative z-10 text-center">
                 <div className="w-full flex justify-center mb-4">
-                  <VedicGlyph index={index} />
+                  <VedicGlyph index={pillar.id} />
                 </div>
 
                 <h3
@@ -231,7 +237,7 @@ export const FoundingEthosSection = () => {
                 className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta/20 via-muted-gold/40 to-terracotta/20"
                 initial={{ scaleX: 0 }}
                 animate={inView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
+                transition={{ duration: 0.8, delay: pillar.id * 0.1 + 0.3 }}
               />
             </motion.div>
           ))}
