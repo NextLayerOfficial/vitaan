@@ -5,10 +5,11 @@ import {
   Edit3,
   Mail,
   GraduationCap,
-  Briefcase,
   Save,
   X,
   Camera,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 import { User } from "@/lib/types";
 import SocialIcon from "@/components/ui/socialIcon";
@@ -54,14 +55,14 @@ const UserProfile: React.FC<UserProfileProps> = ({
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6" ref={refprop}>
       {/* Hero Header */}
-      <div className="bg-gradient-to-br from-[#F4E4BC] to-[#FFF8E7] p-6 rounded-b-2xl shadow">
+      <div className="bg-white p-6 rounded-2xl shadow-lg mb-6">
         <div className="flex flex-col md:flex-row items-center md:justify-between">
           <div className="flex items-center gap-6">
             <div className="relative group">
               <img
                 src={currentUser.image ?? "/default-avatar.png"}
                 alt={currentUser.name}
-                className="w-28 h-28 rounded-xl object-cover border-4 border-white shadow"
+                className="w-28 h-28 aspect-video rounded-xl object-cover border-4 border-white shadow"
               />
               {editMode && (
                 <button className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
@@ -84,12 +85,6 @@ const UserProfile: React.FC<UserProfileProps> = ({
                 </h1>
               )}
               <p className="text-gray-600">@{currentUser.displayUsername}</p>
-              <p
-                className="text-sm italic text-[#555] mt-1 "
-                style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
-              >
-                “सर्वे भवन्तु सुखिनः” — May all be happy.
-              </p>
             </div>
           </div>
 
@@ -121,101 +116,137 @@ const UserProfile: React.FC<UserProfileProps> = ({
         </div>
       </div>
 
-      {/* Academic & Professional */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <ProfileCard
-          title="शैक्षणिक जानकारी / Academic Info"
-          icon={<GraduationCap className="w-5 h-5" />}
-        >
-          <Field
-            label="Graduation Year"
-            value={String(currentUser.graduationYear)}
-            editable={false}
-            onChange={(val) => updateUser("graduationYear", parseInt(val))}
-          />
-          <Field
-            label="Department"
-            value={currentUser.department ?? ""}
-            editable={false}
-            onChange={(val) => updateUser("department", val)}
-          />
-        </ProfileCard>
-
-        <ProfileCard
-          title="पेशा / Professional Info"
-          icon={<Briefcase className="w-5 h-5" />}
-        >
-          <Field
-            label="Company"
-            value={currentUser.currentCompany ?? ""}
-            editable={editMode}
-            onChange={(val) => updateUser("currentCompany", val)}
-          />
-          <Field
-            label="Title"
-            value={currentUser.jobTitle ?? ""}
-            editable={editMode}
-            onChange={(val) => updateUser("jobTitle", val)}
-          />
-        </ProfileCard>
-      </div>
-
-      {/* Contact Info */}
-      <ProfileCard title="संपर्क / Contact" icon={<Mail className="w-5 h-5" />}>
-        <Field
-          label="Email"
-          value={currentUser.email}
-          editable={false}
-          onChange={(val) => updateUser("email", val)}
-          type="email"
-        />
-        <Field
-          label="Phone"
-          value={currentUser.phone ?? ""}
-          editable={editMode}
-          onChange={(val) => updateUser("phone", val)}
-          type="tel"
-        />
-        <Field
-          label="Address"
-          value={currentUser.address ?? ""}
-          editable={editMode}
-          onChange={(val) => updateUser("address", val)}
-          textarea
-        />
-      </ProfileCard>
-
-      {/* Socials */}
-      <ProfileCard title="सोशल मीडिया / Social Media">
-        {currentUser.socials && Object.keys(currentUser.socials).length > 0 ? (
-          <div className="grid grid-cols-2 gap-3">
-            {Object.entries(currentUser.socials).map(([platform, url]) => (
-              <a
-                key={platform}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center p-3 bg-white border border-gray-200 rounded-md hover:shadow-sm"
-              >
-                <SocialIcon
-                  platform={platform}
-                  className="w-5 h-5 mr-2 text-gray-600"
-                />
-                <span className="text-sm font-medium text-gray-900 capitalize">
-                  {platform}
-                </span>
-              </a>
-            ))}
-          </div>
-        ) : (
-          <p
-            className="text-sm text-gray-500 "
-            style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
+      <div className="grid md:grid-cols-6 grid-flow-col gap-6">
+        <div className="space-y-6 col-span-4">
+          <ProfileCard
+            title="Professioinal Info"
+            icon={<GraduationCap className="w-8 h-8" />}
           >
-            कोई लिंक नहीं जुड़े हैं।
-          </p>
-        )}
-      </ProfileCard>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 ">
+              <Field
+                label="Graduation Year"
+                value={String(currentUser.graduationYear)}
+                editable={false}
+                onChange={(val) => updateUser("graduationYear", parseInt(val))}
+              />
+
+              <Field
+                label="Company"
+                value={currentUser.currentCompany ?? ""}
+                editable={editMode}
+                onChange={(val) => updateUser("currentCompany", val)}
+              />
+              <Field
+                label="Department"
+                value={currentUser.department ?? ""}
+                editable={false}
+                onChange={(val) => updateUser("department", val)}
+              />
+              <Field
+                label="Title"
+                value={currentUser.jobTitle ?? ""}
+                editable={editMode}
+                onChange={(val) => updateUser("jobTitle", val)}
+              />
+            </div>
+          </ProfileCard>
+
+          {/* Contact Info */}
+          <ProfileCard title="Contact" icon={<Mail className="w-5 h-5" />}>
+            <Field
+              label="Email"
+              value={currentUser.email}
+              editable={false}
+              onChange={(val) => updateUser("email", val)}
+              type="email"
+              Contact={true}
+            />
+            <Field
+              label="Phone"
+              value={currentUser.phone ?? ""}
+              editable={editMode}
+              onChange={(val) => updateUser("phone", val)}
+              type="tel"
+              Contact={true}
+            />
+            <Field
+              label="Address"
+              value={currentUser.address ?? ""}
+              editable={editMode}
+              onChange={(val) => updateUser("address", val)}
+              textarea
+              Contact={true}
+            />
+          </ProfileCard>
+
+          {/* Socials */}
+        </div>
+        <div className="col-span-2 space-y-5">
+          <ProfileCard title="Account Status">
+            <div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600">Status</span>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      user.banned
+                        ? "bg-red-100 text-red-800"
+                        : "bg-green-100 text-green-800"
+                    }`}
+                  >
+                    {user.banned ? "Banned" : "Active"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600">Email Verified</span>
+                  {user.emailVerified ? (
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                  ) : (
+                    <XCircle className="w-5 h-5 text-red-500" />
+                  )}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600">Role</span>
+                  <span className="text-gray-900 font-medium capitalize">
+                    {user.role}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </ProfileCard>
+          <ProfileCard title="Social Media">
+            {currentUser.socials &&
+            Object.keys(currentUser.socials).length > 0 ? (
+              <div className="grid grid-cols-1 gap-3">
+                {Object.entries(currentUser.socials).map(([platform, url]) => (
+                  <a
+                    key={platform}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center p-3 bg-white border border-gray-200 rounded-md hover:shadow-sm"
+                  >
+                    <SocialIcon
+                      platform={platform}
+                      className="w-5 h-5 mr-2 text-gray-600"
+                    />
+                    <span className="text-sm font-medium text-gray-900 capitalize">
+                      {platform}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <p
+                className="text-sm text-gray-500 "
+                style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
+              >
+                No links to display
+              </p>
+            )}
+          </ProfileCard>
+        </div>
+      </div>
     </div>
   );
 };
@@ -232,9 +263,9 @@ const ProfileCard = ({
   icon?: React.ReactNode;
   children: React.ReactNode;
 }) => (
-  <div className="bg-[#FDF6E3] border-l-1 border-[#DAA520] p-6 rounded-xl shadow-sm space-y-3">
+  <div className="bg-white border-l-1 p-6 rounded-xl shadow-lg space-y-3">
     <h3
-      className="text-lg font-bold flex items-center gap-2 text-gray-800 "
+      className="text-3xl font-bold flex items-center gap-2 text-[#8B4513] "
       style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
     >
       {icon} {title}
@@ -249,10 +280,12 @@ const Field = ({
   value,
   editable,
   onChange,
+  Contact,
   type = "text",
   textarea = false,
 }: {
   label: string;
+  Contact?: boolean;
   value: string;
   editable: boolean;
   onChange: (val: string) => void;
@@ -260,7 +293,7 @@ const Field = ({
   textarea?: boolean;
 }) => (
   <div>
-    <p className="text-xs text-gray-600 mb-1">{label}</p>
+    {!Contact && <p className="text-sm text-gray-600 mb-1">{label}</p>}
     {editable ? (
       textarea ? (
         <textarea
@@ -278,9 +311,15 @@ const Field = ({
         />
       )
     ) : (
-      <p className="text-gray-800">
-        {value || <span className="text-gray-400">—</span>}
-      </p>
+      (Contact == true && (
+        <p className="text-gray-600 text-base font-semibold">
+          {label}: <span className="text-gray-500 text-base">{value}</span>
+        </p>
+      )) || (
+        <p className="text-gray-600 text-lg font-semibold">
+          {value || <span className="text-gray-400">—</span>}
+        </p>
+      )
     )}
   </div>
 );

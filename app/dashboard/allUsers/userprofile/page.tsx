@@ -7,6 +7,7 @@ import type { User } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
+import UserProfilePrint from "@/components/userProfilePrint";
 
 export default function ProfilePage() {
   const searchParams = useSearchParams();
@@ -14,7 +15,18 @@ export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const contentRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
+  const printRef = useRef<HTMLDivElement>(null);
+
+  // const reactToPrintFn = useReactToPrint({ contentRef });
+
+  const handlePrint = useReactToPrint({
+    contentRef: printRef, // ✅ correct for newer versions
+    documentTitle: "User Profile",
+    onAfterPrint: () => {
+      // Optional: Cleanup or toast
+      console.log("Printing finished");
+    },
+  });
 
   useEffect(() => {
     fetch(`/api/user/${id}`)
@@ -33,11 +45,21 @@ export default function ProfilePage() {
             user={user}
             isEditable={false}
             EditingRights={false}
-            refprop={contentRef}
+            // refprop={contentRef}
           />
         </div>
       )}
-      <button onClick={reactToPrintFn}>Print</button>
+      {loading == false && user && (
+        <div style={{ display: "none" }}>
+          <UserProfilePrint ref={printRef} user={user} />
+        </div>
+      )}
+      <button
+        className="flex justify-center mt-4 bg-white p-4 rounded-lg shadow-md w-full cursor-pointer"
+        onClick={handlePrint}
+      >
+        Print
+      </button>
     </main>
   );
 }

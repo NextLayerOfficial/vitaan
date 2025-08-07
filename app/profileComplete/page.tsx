@@ -91,7 +91,6 @@ export default function ProfilePage() {
     }
   };
 
-  
   return (
     <div className="min-h-screen w-full bg-white px-6 py-10 text-black font-sans">
       <form

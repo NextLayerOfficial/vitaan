@@ -10,10 +10,10 @@ export async function sendEmail({
   text: string;
 }) {
   const transport = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    host: "live.smtp.mailtrap.io",
+    port: 587,
     auth: {
-      user: process.env.MAILTRAP_USER,
+      user: process.env.MAILTRAP_USER || "api",
       pass: process.env.MAILTRAP_PASS,
     },
   });
