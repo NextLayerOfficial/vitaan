@@ -14,7 +14,7 @@ export default function ProfilePage() {
   const id = searchParams.get("id");
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const contentRef = useRef<HTMLDivElement>(null);
+  
   const printRef = useRef<HTMLDivElement>(null);
 
   // const reactToPrintFn = useReactToPrint({ contentRef });

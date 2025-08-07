@@ -19,7 +19,7 @@ export async function sendEmail({
   });
 
   const info = await transport.sendMail({
-    from: `"Your App" <${process.env.MAILTRAP_USER}>`, // sender address
+    from: "Support Team <no-reply@app-demonstration.com>", // sender address
     to,
     subject,
     text: text.replace(/<\/?[^>]+(>|$)/g, ""), // strip tags for plain text fallback
