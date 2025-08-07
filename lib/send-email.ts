@@ -9,6 +9,13 @@ export async function sendEmail({
   subject: string;
   text: string;
 }) {
+  // --- START DEBUG LOGS ---
+  console.log("--- Vercel Email Debug ---");
+  console.log("Attempting to send email to:", to);
+  console.log("process.env.MAILTRAP_USER:", process.env.MAILTRAP_USER);
+  console.log("Does MAILTRAP_PASS exist?:", !!process.env.MAILTRAP_PASS);
+  // --- END DEBUG LOGS ---
+
   const transport = nodemailer.createTransport({
     host: "live.smtp.mailtrap.io",
     port: 587,
@@ -19,7 +26,7 @@ export async function sendEmail({
   });
 
   const info = await transport.sendMail({
-    from: "Support Team <no-reply@app-demonstrator.site>", // sender address
+    from: "noreply@app-demonstrator.site",
     to,
     subject,
     text: text.replace(/<\/?[^>]+(>|$)/g, ""), // strip tags for plain text fallback
