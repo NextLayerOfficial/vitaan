@@ -19,6 +19,8 @@ export async function sendEmail({
   const transport = nodemailer.createTransport({
     host: "live.smtp.mailtrap.io",
     port: 587,
+    secure: false,
+    requireTLS: true,
     auth: {
       user: process.env.MAILTRAP_USER || "api",
       pass: process.env.MAILTRAP_PASS,
