@@ -76,10 +76,29 @@ export const auth = betterAuth({
   },
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }, request) => {
+      const verificationLink = `${url}profileComplete`;
+
       await sendEmail({
         to: user.email,
         subject: "Verify your email address",
-        text: `Click the link to verify your email: ${url}profileComplete`,
+        // text: `Click the link to verify your email: ${url}profileComplete`,
+        text: `Click the link to verify your email: ${verificationLink}`,
+        html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9fafb; color: #111827;">
+          <h2 style="color: #c4a484;">Verify your email address</h2>
+          <p style="font-size: 16px;">Thanks for signing up! Please confirm your email by clicking the button below:</p>
+          <a href="${verificationLink}" 
+             style="display: inline-block; margin-top: 12px; padding: 12px 20px; background-color: #c4a484; color: #fff; text-decoration: none; border-radius: 6px;">
+            Verify Email
+          </a>
+          <p style="margin-top: 20px; font-size: 14px; color: #6b7280;">
+            Or copy and paste this URL into your browser:<br/>
+            <a href="${verificationLink}">${verificationLink}</a>
+          </p>
+          <hr style="margin: 32px 0; border: none; border-top: 1px solid #e5e7eb;" />
+          <p style="font-size: 12px; color: #9ca3af;">If you did not create this account, you can safely ignore this email.</p>
+        </div>
+      `,
       });
     },
     async afterEmailVerification(user: { email: any }, request: any) {
