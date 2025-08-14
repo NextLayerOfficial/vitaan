@@ -35,6 +35,15 @@ model User {
   @@map("user")
 }
 
+model SocialLink {
+  id        Int      @id @default(autoincrement())
+  name      String
+  url       String
+  icon      String // store name like "instagram", "twitter", etc.
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model File {
   id        String   @id @default(uuid())
   name      String
