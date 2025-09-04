@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
         key,
         category,
         userId,
+        approved: false, // 👈 mark as pending
       },
     });
 

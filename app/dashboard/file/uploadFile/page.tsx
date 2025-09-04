@@ -3,7 +3,6 @@
 import { useState } from "react";
 import axios from "axios";
 import { useUser } from "@/context/UserContext";
-// import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 
 export default function S3Uploader() {

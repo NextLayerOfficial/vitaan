@@ -51,6 +51,7 @@ model File {
   type      String
   key       String
   category  String
+  approved  Boolean  @default(false) // 👈 pending until admin acts
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String

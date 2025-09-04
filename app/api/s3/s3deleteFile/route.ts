@@ -23,7 +23,7 @@ export async function DELETE(req: NextRequest) {
     await prisma.file.delete({
       where: { id: fileId },
     });
-
+    
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting file:", error);

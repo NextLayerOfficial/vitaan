@@ -14,10 +14,5 @@ export default async function AdminLayout({
     redirect("/");
   }
 
-  return (
-    <div>
-      {/* You can add common admin layout elements here */}
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }

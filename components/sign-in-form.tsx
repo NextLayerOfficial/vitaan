@@ -49,10 +49,6 @@ export default function SignInForm() {
         onRequest: () => {
           toast("Signing in...");
         },
-        // onSuccess: () => {
-        //   form.reset();
-        //   redirect("/dashboard");
-        // },
         onSuccess: async () => {
           form.reset();
 

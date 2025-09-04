@@ -82,6 +82,19 @@ export default function AppSidebar({ user }: UserProps) {
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
+          <SidebarMenuItem className="">
+            <SidebarMenuButton>
+              <Link
+                href="/dashboard/file/uploadFile"
+                className="flex items-center gap-3"
+              >
+                <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
+                  <LayoutDashboard className="h-5 w-5" />
+                </div>
+                <span className="">Upload File</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
           {/* Add more menu items as needed */}
           {user?.role === "admin" && (
             <SidebarMenuItem>
@@ -98,17 +111,18 @@ export default function AppSidebar({ user }: UserProps) {
               </SidebarMenuButton>
             </SidebarMenuItem>
           )}
+
           {user?.role === "admin" && (
             <SidebarMenuItem className="">
               <SidebarMenuButton>
                 <Link
-                  href="/dashboard/file/uploadFile"
+                  href="/dashboard/file/ApproveFiles"
                   className="flex items-center gap-3"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
                     <LayoutDashboard className="h-5 w-5" />
                   </div>
-                  <span className="text-red-600">Upload File</span>
+                  <span className="text-red-600">Approve files </span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

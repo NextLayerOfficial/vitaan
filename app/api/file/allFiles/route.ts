@@ -14,9 +14,10 @@ export async function GET(req: NextRequest) {
     const itemsPerPage = isNaN(limit) || limit < 1 || limit > 100 ? 20 : limit;
     const skip = (currentPage - 1) * itemsPerPage;
 
-    // Build the where clause
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const where: any = {};
+    const where: any = {
+      approved: true, // ✅ only approved files
+    };
 
     if (category) {
       where.category = category;
