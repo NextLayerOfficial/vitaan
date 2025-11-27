@@ -1,7 +1,7 @@
 // app/dashboard/DashboardClient.tsx
 "use client";
 
-import { Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
+import { Instagram, Twitter, Facebook, Linkedin, FileDown } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import MagazineGrid from "@/components/MagazineGrid";
@@ -23,7 +23,6 @@ export default function DashboardClient({
 
   const iconMap = {
     instagram: <Instagram />,
-    twitter: <Twitter />,
     facebook: <Facebook />,
     linkedin: <Linkedin />,
   };
@@ -44,20 +43,15 @@ export default function DashboardClient({
               name: "Instagram",
               url: "https://instagram.com",
             },
+
             {
               id: 2,
-              icon: "twitter",
-              name: "Twitter",
-              url: "https://twitter.com",
-            },
-            {
-              id: 3,
               icon: "facebook",
               name: "Facebook",
               url: "https://facebook.com",
             },
             {
-              id: 4,
+              id: 3,
               icon: "linkedin",
               name: "LinkedIn",
               url: "https://linkedin.com",
@@ -92,7 +86,7 @@ export default function DashboardClient({
         <section className="bg-white rounded-2xl shadow-lg p-8">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-semibold text-gray-800">
-              🌐 Social Links
+              Social Links
             </h2>
             {isAdmin && (
               <div className="flex gap-3">
@@ -114,7 +108,7 @@ export default function DashboardClient({
                 ) : (
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="px-4 py-2 bg-terracotta text-white rounded-lg hover:bg-terracotta/90"
                   >
                     Edit
                   </button>
@@ -123,7 +117,7 @@ export default function DashboardClient({
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {socials.map((link, index) => (
               <div
                 key={link.id}
@@ -154,7 +148,38 @@ export default function DashboardClient({
           </div>
         </section>
 
+        <section className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            📝 Joining Application Form
+          </h2>
+          <p className="text-gray-600 leading-relaxed text-lg">
+            Below is the official Joining Application Form Template. Please
+            download the form, fill it out, sign it, save it as{" "}
+            <strong>"Vitaan_Application_Form_[YourName].pdf"</strong> and upload
+            the signed copy to Upload file with <strong>"Application"</strong>{" "}
+            option selected from the dropdown to complete your submission.
+          </p>
+
+          {/* Download Form */}
+          <div className="flex flex-col sm:flex-row items-center justify-between bg-gray-50 p-4 rounded-xl border border-gray-200">
+            <div className="flex items-center gap-3">
+              <FileDown className="w-6 h-6 text-terracotta" />
+              <p className="text-gray-700 font-medium">
+                Vitaan_Application_Form.pdf
+              </p>
+            </div>
+            <a
+              href="/VITAAN APPLICATION FORM.pdf"
+              download
+              className="mt-3 sm:mt-0 px-4 py-2 bg-terracotta text-white rounded-lg hover:bg-terracotta/90 transition"
+            >
+              Download Form
+            </a>
+          </div>
+        </section>
+
         {/* Magazine Cards */}
+
         <section className="bg-white rounded-2xl shadow-lg p-8">
           <h2 className="text-2xl font-semibold mb-6 text-gray-800">
             📰 Latest Magazine Uploads

@@ -1,76 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-
-// export default function UserImageUpload({
-//   onUploadSuccess,
-// }: {
-//   onUploadSuccess: (publicUrl: string) => void;
-// }) {
-//   const [isUploading, setIsUploading] = useState(false);
-//   const [error, setError] = useState<string | null>(null);
-
-//   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const file = e.target.files?.[0];
-//     if (!file) return;
-
-//     const ext = file.name.split(".").pop()?.toLowerCase();
-//     const allowed = ["jpg", "jpeg", "png", "webp", "gif", "bmp", "tiff", "svg"];
-//     if (!ext || !allowed.includes(ext)) {
-//       setError("Invalid file type.");
-//       return;
-//     }
-
-//     setIsUploading(true);
-//     setError(null);
-
-//     try {
-//       // Step 1: Request presigned URL
-//       const res = await fetch("/api/s3/s3uploadPublic", {
-//         method: "POST",
-//         body: JSON.stringify({
-//           filename: file.name,
-//           filetype: file.type,
-//         }),
-//         headers: { "Content-Type": "application/json" },
-//       });
-
-//       const { uploadUrl, publicUrl } = await res.json();
-
-//       // Step 2: Upload file to S3
-//       const uploadRes = await fetch(uploadUrl, {
-//         method: "PUT",
-//         headers: {
-//           "Content-Type": file.type,
-//         },
-//         body: file,
-//       });
-
-//       if (!uploadRes.ok) throw new Error("Upload failed");
-
-//       onUploadSuccess(publicUrl);
-//     } catch (err: any) {
-//       setError(err.message || "Upload error");
-//     } finally {
-//       setIsUploading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="space-y-2">
-//       <label className="block font-medium">Upload Profile Image</label>
-//       <input
-//         type="file"
-//         accept="image/*"
-//         onChange={handleFileChange}
-//         disabled={isUploading}
-//         className="block"
-//       />
-//       {isUploading && <p className="text-sm text-gray-500">Uploading...</p>}
-//       {error && <p className="text-sm text-red-500">{error}</p>}
-//     </div>
-//   );
-// }
 "use client";
 
 import { useState } from "react";
@@ -78,7 +5,8 @@ import { useState } from "react";
 export default function UserImageUpload({
   onUploadSuccess,
 }: {
-  onUploadSuccess: (publicUrl: string) => void;
+  // onUploadSuccess: (publicUrl: string) => void;
+  onUploadSuccess: (data: { key: string; publicUrl: string }) => void;
 }) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -108,7 +36,7 @@ export default function UserImageUpload({
       });
 
       if (!res.ok) throw new Error("Failed to get upload URL");
-      const { uploadUrl, publicUrl } = await res.json();
+      const { uploadUrl, key, publicUrl } = await res.json();
 
       const uploadRes = await fetch(uploadUrl, {
         method: "PUT",
@@ -120,7 +48,7 @@ export default function UserImageUpload({
 
       if (!uploadRes.ok) throw new Error("Upload failed");
 
-      onUploadSuccess(publicUrl);
+      onUploadSuccess({ key, publicUrl });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Upload error");

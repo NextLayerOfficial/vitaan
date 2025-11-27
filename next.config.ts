@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         hostname: "yash-vitaan-nextlayer-test.s3.ap-south-1.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "photos.google.com",
+      },
     ],
   },
   eslint: {

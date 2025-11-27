@@ -28,11 +28,18 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: null,
       },
+      status: {
+        type: "string",
+        defaultValue: "pending",
+      },
       jobTitle: {
         type: "string",
         defaultValue: null,
       },
-
+      imageKey: {
+        type: "string",
+        defaultValue: null,
+      },
       instagram: { type: "string", defaultValue: "" },
       facebook: { type: "string", defaultValue: "" },
       linkedin: { type: "string", defaultValue: "" },
@@ -41,7 +48,6 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: null,
       },
-
       phone: {
         type: "string",
         defaultValue: null,
@@ -77,7 +83,6 @@ export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }, request) => {
       const verificationLink = `${url}profileComplete`;
-
       await sendEmail({
         to: user.email,
         subject: "Verify your email address",
@@ -101,6 +106,7 @@ export const auth = betterAuth({
       `,
       });
     },
+
     async afterEmailVerification(user: { email: any }, request: any) {
       return Response.redirect(
         `${process.env.BETTER_AUTH_URL}/profileComplete`,
@@ -120,12 +126,23 @@ export const auth = betterAuth({
       if (ctx.path === "/sign-up/email") {
         const userSecret = ctx.body?.secret;
         const envSecret = process.env.INTERNAL_SECRET;
-
+        // const email = ctx.body?.email;
+        // const user = await prisma.user.findUnique({ where: { email } });
+        // if (!user) return;
         if (!userSecret || userSecret !== envSecret) {
           throw new APIError("BAD_REQUEST", {
             message: "Invalid or missing company secret code.",
           });
         }
+
+        // if (user.status !== "approved") {
+        //   throw new APIError("FORBIDDEN", {
+        //     message:
+        //       user.status === "pending"
+        //         ? "Your account is awaiting admin approval."
+        //         : "Your account has been rejected.",
+        //   });
+        // }
       }
     }),
   },

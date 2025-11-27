@@ -1,6 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
-// import AppSidebar from "@/components/app-sidebar";
-// import AppHeader from "@/components/app-header";
+
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -26,9 +25,7 @@ export default async function DashboardLayout({
   });
 
   if (!dbUser) redirect("/sign-in");
-  // const user: User = {
-  //   ...dbUser, // includes socials as JSON
-  // };
+
   const user: User = {
     id: dbUser.id,
     name: dbUser.name ?? "",
@@ -40,6 +37,7 @@ export default async function DashboardLayout({
     createdAt: dbUser.createdAt,
     updatedAt: dbUser.updatedAt,
     image: dbUser.image ?? "",
+    imageKey: dbUser.imageKey ?? "",
     address: dbUser.address ?? "",
     banned: dbUser.banned ?? false,
     banReason: dbUser.banReason ?? "",

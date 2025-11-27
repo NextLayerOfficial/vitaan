@@ -4,6 +4,7 @@ export interface User {
   email: string;
   role: string;
   address?: string;
+  imageKey?: string; // S3 object key for the profile image
   username: string;
   displayUsername: string;
   banned?: boolean; // default is false
@@ -16,6 +17,7 @@ export interface User {
   currentCompany?: string;
   jobTitle?: string;
   phone?: string;
+  status?: string; // "pending", "approved", "rejected"
   emailVerified: boolean;
   createdAt: Date;
   updatedAt: Date;

@@ -4,19 +4,26 @@ import { Button } from "./ui/button";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import SignOutForm from "./sign-out-form";
+import Image from "next/image";
 
 export default async function Navbar() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   return (
-    <header className="sticky top-0 z-40 border-b  bg-ivory">
-      <div className="container flex h-16 items-center justify-between py-4">
+    <header className="sticky top-0 z-40 border-b  bg-white">
+      <div className="container flex h-24 items-center justify-between py-4">
         <div
           style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
           className=" font-semibold tracking-tight text-terracotta md:text-2xl"
         >
-          वितान
+          <Image
+            src="/logomain.jpg"
+            alt="Logo"
+            width={80}
+            height={80}
+            className="inline-block mr-2"
+          />
         </div>
         <nav className="flex items-center gap-4 sm:gap-2">
           {session ? (

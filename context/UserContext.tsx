@@ -12,7 +12,6 @@ export const UserProvider = ({
   user: User | null;
   children: React.ReactNode;
 }) => {
-  console.log("User in context:", user);
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 

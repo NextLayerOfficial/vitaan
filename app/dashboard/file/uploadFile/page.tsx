@@ -92,10 +92,11 @@ export default function S3Uploader() {
         onChange={(e) => setCategory(e.target.value)}
         className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
+        <option value="application">Application</option>
         <option value="document">Document</option>
         <option value="magazine">Magazine</option>
-        <option value="others">Others</option>
         <option value="general">general</option>
+        <option value="others">Others</option>
       </select>
 
       {/* Upload button */}

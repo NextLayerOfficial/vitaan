@@ -111,6 +111,21 @@ export default function AppSidebar({ user }: UserProps) {
               </SidebarMenuButton>
             </SidebarMenuItem>
           )}
+          {user?.role === "admin" && (
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <Link
+                  href="/dashboard/adminpage/approveUsers"
+                  className="flex items-center gap-3"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
+                    <LayoutDashboard className="h-5 w-5" />
+                  </div>
+                  <span className="text-red-600">Approve users</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
 
           {user?.role === "admin" && (
             <SidebarMenuItem className="">

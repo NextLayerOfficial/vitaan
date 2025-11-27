@@ -45,12 +45,10 @@ export default function SignUpForm() {
         email,
         password,
         name,
-
         // @ts-expect-error: temporary fix for type issue with form library
         secret,
         username,
       },
-
       {
         onRequest: () => {
           toast("Signing up...");

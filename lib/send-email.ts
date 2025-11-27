@@ -12,12 +12,13 @@ export async function sendEmail({
   html?: string;
 }) {
   const transport = nodemailer.createTransport({
-    host: "live.smtp.mailtrap.io",
+    // host: "live.smtp.mailtrap.io",
+    host: process.env.MAILTRAP_HOST,
     port: 587,
     secure: false,
     requireTLS: true,
     auth: {
-      user: process.env.MAILTRAP_USER || "api",
+      user: process.env.MAILTRAP_USER,
       pass: process.env.MAILTRAP_PASS,
     },
   });

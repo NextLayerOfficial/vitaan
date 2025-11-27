@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+
 const profileSchema = z.object({
   address: z.string().min(1, "Address is required"),
   graduationYear: z.coerce
@@ -34,6 +35,7 @@ const profileSchema = z.object({
     instagram: z.string().url("Invalid Instagram URL").optional(),
     facebook: z.string().url("Invalid Facebook URL").optional(),
   }),
+  imageKey: z.string().optional(),
   currentCompany: z.string().min(1, "Current company is required"),
   jobTitle: z.string().min(1, "Job title is required"),
 });
@@ -41,12 +43,13 @@ const profileSchema = z.object({
 export default function ProfilePage() {
   const user = useUser();
   const [imageUrl, setImageUrl] = useState<string | undefined>();
-  const router = useRouter();
 
+  const router = useRouter();
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       address: "",
+      imageKey: "",
       graduationYear: undefined,
       department: "",
       phone: "",
@@ -73,6 +76,7 @@ export default function ProfilePage() {
           instagram: user.socials?.instagram ?? "",
           linkedin: user.socials?.linkedin ?? "",
         },
+        imageKey: user.imageKey ?? "",
         currentCompany: user.currentCompany ?? "",
         jobTitle: user.jobTitle ?? "",
       });
@@ -115,9 +119,10 @@ export default function ProfilePage() {
           <section>
             <FormLabel>Profile Picture</FormLabel>
             <UserImageUpload
-              onUploadSuccess={(url) => {
-                setImageUrl(url);
-                form.setValue("image", url);
+              onUploadSuccess={({ key, publicUrl }) => {
+                setImageUrl(publicUrl);
+                form.setValue("image", publicUrl); // store URL for display
+                form.setValue("imageKey", key);
               }}
             />
             {imageUrl && (

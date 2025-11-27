@@ -248,6 +248,7 @@ export default function FileDashboardPage() {
             >
               <option value="">All Categories</option>
               <option value="document">Document</option>
+              <option value="application">Application</option>
               <option value="magazine">Magazine</option>
               <option value="general">General</option>
               <option value="others">Others</option>

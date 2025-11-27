@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 export async function GET() {
   try {
     const users = await prisma.user.findMany({
+      where: { status: "approved" },
       orderBy: { createdAt: "desc" },
       select: {
         id: true,
@@ -13,6 +14,7 @@ export async function GET() {
         displayUsername: true,
         role: true,
         banned: true,
+
         banReason: true,
         graduationYear: true,
         department: true,

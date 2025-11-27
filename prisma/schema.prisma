@@ -20,6 +20,7 @@ model User {
   address         String?
   graduationYear  Int?
   department      String?
+  imageKey        String? // S3 object key for the profile image
   socials         Json?
   currentCompany  String?
   jobTitle        String?
@@ -28,9 +29,11 @@ model User {
   image           String?
   createdAt       DateTime
   updatedAt       DateTime
-  accounts        Account[]
-  File            File[]
-  sessions        Session[]
+  status          String    @default("pending") // "pending", "approved", "rejected"
+
+  accounts Account[]
+  File     File[]
+  sessions Session[]
 
   @@map("user")
 }

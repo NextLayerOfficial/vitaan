@@ -26,9 +26,7 @@ export default async function DashboardLayout({
   });
 
   if (!dbUser) redirect("/sign-in");
-  // const user: User = {
-  //   ...dbUser, // includes socials as JSON
-  // };
+
   const user: User = {
     id: dbUser.id,
     name: dbUser.name ?? "",
@@ -41,6 +39,7 @@ export default async function DashboardLayout({
     updatedAt: dbUser.updatedAt,
     image: dbUser.image ?? "",
     address: dbUser.address ?? "",
+    status: dbUser.status ?? "pending",
     banned: dbUser.banned ?? false,
     banReason: dbUser.banReason ?? "",
     banExpires: dbUser.banExpires ?? null,
@@ -52,7 +51,17 @@ export default async function DashboardLayout({
     socials: (dbUser.socials ?? {}) as Record<string, string>, // ✅ coerce JSON to correct type
   };
 
-  return (
+  return user.status !== "approved" ? (
+    <div>
+      <h1 className="text-2xl font-bold text-center mt-20">
+        Account Pending Approval
+      </h1>
+      <p className="text-center mt-4">
+        Your account is currently pending approval by an administrator. You
+        shall be allowed when admin approves it. 
+      </p>
+    </div>
+  ) : (
     <SidebarProvider className="bg-ivory">
       <UserProvider user={user}>
         <div className="flex min-h-screen w-full ">

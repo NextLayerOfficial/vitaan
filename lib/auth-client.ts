@@ -3,12 +3,11 @@ import {
   adminClient,
   usernameClient,
   inferAdditionalFields,
-  
 } from "better-auth/client/plugins";
 
 export const authClient = createAuthClient({
   baseURL: process.env.BETTER_AUTH_URL,
-   
+
   plugins: [
     adminClient(),
     usernameClient(),
@@ -34,7 +33,15 @@ export const authClient = createAuthClient({
           type: "string",
           defaultValue: null,
         },
+        status: {
+          type: "string",
+          defaultValue: "pending",
+        },
         phone: {
+          type: "string",
+          defaultValue: null,
+        },
+        imageKey: {
           type: "string",
           defaultValue: null,
         },

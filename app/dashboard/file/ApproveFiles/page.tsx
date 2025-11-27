@@ -41,18 +41,23 @@ export default function AdminFileApproval() {
             <p className="font-medium">{file.name}</p>
             <p className="text-sm text-gray-500">{file.category}</p>
           </div>
-          <Button onClick={() => handleDownload(file.key)}>Download</Button>
+          <Button
+            className="cursor-pointer"
+            onClick={() => handleDownload(file.key)}
+          >
+            Download
+          </Button>
 
           <div className="flex gap-2">
             <button
               onClick={() => handleAction(file.id, "approve")}
-              className="px-3 py-1 bg-green-600 text-white rounded"
+              className="px-3 py-1 bg-green-600 text-white rounded cursor-pointer"
             >
               Approve
             </button>
             <button
               onClick={() => handleAction(file.id, "reject")}
-              className="px-3 py-1 bg-red-600 text-white rounded"
+              className="px-3 py-1 bg-red-600 text-white rounded cursor-pointer"
             >
               Reject
             </button>
