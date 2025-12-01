@@ -122,20 +122,48 @@ export const auth = betterAuth({
     max: 10,
   },
   hooks: {
+    // before: createAuthMiddleware(async (ctx) => {
+    //   if (ctx.path === "/sign-up/email") {
+    //     // const userSecret = ctx.body?.secret;
+    //     // const envSecret = process.env.INTERNAL_SECRET;
+    //     const email = ctx.body?.email;
+    //     const user = await prisma.user.findUnique({ where: { email } });
+    //     if (!user) return;
+
+    //     // if (!userSecret || userSecret !== envSecret) {
+    //     //   throw new APIError("BAD_REQUEST", {
+    //     //     message: "Invalid or missing company secret code.",
+    //     //   });
+    //     // }
+
+    //     if (user.status !== "approved") {
+    //       throw new APIError("FORBIDDEN", {
+    //         message:
+    //           user.status === "pending"
+    //             ? "Your account is awaiting admin approval."
+    //             : "Your account has been rejected.",
+    //       });
+    //     }
+    //   }
+    // }),
     before: createAuthMiddleware(async (ctx) => {
-      if (ctx.path === "/sign-up/email") {
-        // const userSecret = ctx.body?.secret;
-        // const envSecret = process.env.INTERNAL_SECRET;
+      const path = ctx.path || "";
+      const method = ctx.method?.toUpperCase() || "GET";
+
+      // ✅ Allow sign-up completely, so email can be sent and user created
+      if (path === "/sign-up/email" && method === "POST") {
+        return;
+      }
+
+      // ❗ Only enforce status check on sign-in
+      if (path === "/sign-in/email" && method === "POST") {
         const email = ctx.body?.email;
+        if (!email) return;
+
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) return;
+        if (!user) return; // Better Auth will handle "no such user"
 
-        // if (!userSecret || userSecret !== envSecret) {
-        //   throw new APIError("BAD_REQUEST", {
-        //     message: "Invalid or missing company secret code.",
-        //   });
-        // }
-
+        // Now enforce admin approval
         if (user.status !== "approved") {
           throw new APIError("FORBIDDEN", {
             message:
