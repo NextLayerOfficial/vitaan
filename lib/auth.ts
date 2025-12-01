@@ -124,25 +124,26 @@ export const auth = betterAuth({
   hooks: {
     before: createAuthMiddleware(async (ctx) => {
       if (ctx.path === "/sign-up/email") {
-        const userSecret = ctx.body?.secret;
-        const envSecret = process.env.INTERNAL_SECRET;
-        // const email = ctx.body?.email;
-        // const user = await prisma.user.findUnique({ where: { email } });
-        // if (!user) return;
-        if (!userSecret || userSecret !== envSecret) {
-          throw new APIError("BAD_REQUEST", {
-            message: "Invalid or missing company secret code.",
-          });
-        }
+        // const userSecret = ctx.body?.secret;
+        // const envSecret = process.env.INTERNAL_SECRET;
+        const email = ctx.body?.email;
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) return;
 
-        // if (user.status !== "approved") {
-        //   throw new APIError("FORBIDDEN", {
-        //     message:
-        //       user.status === "pending"
-        //         ? "Your account is awaiting admin approval."
-        //         : "Your account has been rejected.",
+        // if (!userSecret || userSecret !== envSecret) {
+        //   throw new APIError("BAD_REQUEST", {
+        //     message: "Invalid or missing company secret code.",
         //   });
         // }
+
+        if (user.status !== "approved") {
+          throw new APIError("FORBIDDEN", {
+            message:
+              user.status === "pending"
+                ? "Your account is awaiting admin approval."
+                : "Your account has been rejected.",
+          });
+        }
       }
     }),
   },

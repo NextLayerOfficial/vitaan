@@ -33,21 +33,26 @@ export default function SignUpForm() {
       name: "",
       email: "",
       password: "",
-      secret: "",
+      // secret: "",
       username: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { name, email, password, secret, username } = values;
+    const { name, email, password, username } = values;
     await authClient.signUp.email(
       {
         email,
         password,
         name,
-        // @ts-expect-error: temporary fix for type issue with form library
-        secret,
         username,
+        graduationYear: 0,
+        address: "",
+        department: "",
+        currentCompany: "",
+        jobTitle: "",
+        phone: "",
+        imageKey: ""
       },
       {
         onRequest: () => {
@@ -114,7 +119,7 @@ export default function SignUpForm() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="secret"
               render={({ field }) => (
@@ -126,7 +131,7 @@ export default function SignUpForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name="username"

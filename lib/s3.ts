@@ -48,7 +48,6 @@ export async function getPresignedUploadUrl({
   filename: string;
   filetype: string;
 }) {
-  // const key = `users/${filename}`;
   const ext = filename.split(".").pop();
   const uuid = uuidv4();
   const key = `private/${uuid}.${ext}`;
@@ -102,4 +101,3 @@ export async function deleteObject(key: string): Promise<void> {
     throw new Error("Failed to delete file from S3");
   }
 }
-
