@@ -52,7 +52,7 @@ export default function SignUpForm() {
         currentCompany: "",
         jobTitle: "",
         phone: "",
-        imageKey: ""
+        imageKey: "",
       },
       {
         onRequest: () => {
