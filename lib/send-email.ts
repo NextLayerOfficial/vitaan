@@ -67,7 +67,7 @@ export async function sendEmail({
     });
 
     const info = await transport.sendMail({
-      from: "noreply@app-demonstrator.site",
+      from: "noreply@vitaan.org",
       to,
       subject,
       text: text.replace(/<\/?[^>]+(>|$)/g, ""), // strip tags for plain text fallback
