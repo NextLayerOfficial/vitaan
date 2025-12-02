@@ -24,3 +24,20 @@ export const signInFormSchema = formSchema.pick({
   email: true,
   password: true,
 });
+
+export const ForgotPasswordSchema = z.object({
+  email: z.string().email("Invalid email").min(1, "Email is required"),
+});
+
+export const ResetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128, "Password must be at most 128 characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });

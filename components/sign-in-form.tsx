@@ -119,6 +119,14 @@ export default function SignInForm() {
                 </FormItem>
               )}
             />
+            <div className="text-right">
+              <a
+                href="/forgot-password"
+                className="text-sm text-primary hover:underline underline-offset-4"
+              >
+                Forgot password?
+              </a>
+            </div>
             <Button type="submit" className="w-full">
               Sign In
             </Button>
