@@ -76,7 +76,24 @@ export default function SignInForm() {
           }
         },
         onError: (ctx) => {
-          toast.error(ctx.error.message);
+          // toast.error(ctx.error.message);
+          const msg = ctx.error.message;
+
+          // 🔁 Pending → redirect to /pending
+          if (msg === "Your account is awaiting admin approval.") {
+            router.push("/pending");
+            return;
+          }
+
+          // ❌ Rejected → maybe show toast or redirect elsewhere
+          if (msg === "Your account has been rejected.") {
+            toast.error("Your account has been rejected by an administrator.");
+            // or: router.push("/rejected");
+            return;
+          }
+
+          // Default error behavior
+          toast.error(msg);
         },
       }
     );
