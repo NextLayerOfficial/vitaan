@@ -123,16 +123,18 @@ export default function DashboardClient({
                 key={link.id}
                 className="flex flex-col items-center gap-2 text-center"
               >
-                <div className="p-4 rounded-full bg-gray-100">
-                  {iconMap[link.icon]}
-                </div>
                 {isEditing ? (
-                  <input
-                    type="url"
-                    value={link.url}
-                    onChange={(e) => handleChange(index, e.target.value)}
-                    className="text-sm border rounded px-2 py-1 w-full"
-                  />
+                  <>
+                    <div className="p-4 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+                      {iconMap[link.icon]}
+                    </div>
+                    <input
+                      type="url"
+                      value={link.url}
+                      onChange={(e) => handleChange(index, e.target.value)}
+                      className="text-sm border rounded px-2 py-1 w-full"
+                    />
+                  </>
                 ) : (
                   <a
                     href={link.url}
@@ -140,6 +142,9 @@ export default function DashboardClient({
                     rel="noopener noreferrer"
                     className="text-sm font-medium hover:text-blue-600 transition"
                   >
+                    <div className="p-4 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+                      {iconMap[link.icon]}
+                    </div>
                     {link.name}
                   </a>
                 )}

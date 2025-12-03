@@ -88,7 +88,6 @@ export default function SignInForm() {
           // ❌ Rejected → maybe show toast or redirect elsewhere
           if (msg === "Your account has been rejected.") {
             toast.error("Your account has been rejected by an administrator.");
-            // or: router.push("/rejected");
             return;
           }
 
