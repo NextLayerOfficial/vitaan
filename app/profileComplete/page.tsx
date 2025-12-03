@@ -20,7 +20,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-
 const profileSchema = z.object({
   address: z.string().min(1, "Address is required"),
   graduationYear: z.coerce
