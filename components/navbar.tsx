@@ -44,7 +44,7 @@ export default async function Navbar() {
             <>
               <Link
                 href="/sign-in"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground mr-3"
               >
                 Login
               </Link>
