@@ -41,20 +41,20 @@ export default function DashboardClient({
               id: 1,
               icon: "instagram",
               name: "Instagram",
-              url: "https://instagram.com",
+              url: "https://www.instagram.com/bit.sarjana?igsh=b3NrYXg1aG9tbTll",
             },
 
             {
               id: 2,
               icon: "facebook",
               name: "Facebook",
-              url: "https://facebook.com",
+              url: "https://www.facebook.com/share/1aPQmiMezQ/",
             },
             {
               id: 3,
               icon: "linkedin",
               name: "LinkedIn",
-              url: "https://linkedin.com",
+              url: "https://www.linkedin.com/company/sarjanabits/",
             },
           ]);
         }
