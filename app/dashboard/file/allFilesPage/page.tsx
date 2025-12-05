@@ -247,11 +247,12 @@ export default function FileDashboardPage() {
               className="w-full p-2 border rounded-lg bg-background"
             >
               <option value="">All Categories</option>
-              <option value="document">Document</option>
-              <option value="application">Application</option>
-              <option value="magazine">Magazine</option>
+              <option value="vitaan_docs">Vitaan docs</option>
+              <option value="smarika">Smarika</option>
+              <option value="sarjana">Sarjana</option>
+              {/* <option value="magazine">Magazine</option>
               <option value="general">General</option>
-              <option value="others">Others</option>
+              <option value="others">Others</option> */}
             </select>
           </div>
         </div>

@@ -154,22 +154,28 @@ export default function DashboardClient({
         </section>
 
         <section className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
-          <h2 className="text-2xl font-semibold text-gray-800">
-            📝 Joining Application Form
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
+            Joining Application Form
           </h2>
-          <p className="text-gray-600 leading-relaxed text-lg">
+          <p className="text-gray-600 leading-relaxed text-base sm:text-lg  ">
             Below is the official Joining Application Form Template. Please
             download the form, fill it out, sign it, save it as{" "}
-            <strong>"Vitaan_Application_Form_[YourName].pdf"</strong> and upload
-            the signed copy to Upload file with <strong>"Application"</strong>{" "}
-            option selected from the dropdown to complete your submission.
+            <strong className="block sm:hidden">
+              "Vitaan_Application_ Form_ [YourName].pdf"
+            </strong>
+            <strong className="hidden sm:block">
+              "Vitaan_Application_Form_[YourName].pdf"{" "}
+            </strong>
+            and upload the signed copy to Upload file with{" "}
+            <strong>"Vitaan Docs"</strong> option selected from the dropdown to
+            complete your submission.
           </p>
 
           {/* Download Form */}
           <div className="flex flex-col sm:flex-row items-center justify-between bg-gray-50 p-4 rounded-xl border border-gray-200">
             <div className="flex items-center gap-3">
-              <FileDown className="w-6 h-6 text-terracotta" />
-              <p className="text-gray-700 font-medium">
+              <FileDown className="w-6 h-6 text-terracotta hidden sm:block " />
+              <p className="text-gray-700 font-medium text-sm sm:text-base">
                 Vitaan_Application_Form.pdf
               </p>
             </div>
@@ -187,7 +193,7 @@ export default function DashboardClient({
 
         <section className="bg-white rounded-2xl shadow-lg p-8">
           <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-            📰 Latest Magazine Uploads
+            📰 Latest Uploads
           </h2>
           <MagazineGrid files={latestMagazines} />
         </section>
