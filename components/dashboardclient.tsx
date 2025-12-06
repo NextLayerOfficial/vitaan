@@ -167,7 +167,7 @@ export default function DashboardClient({
               "Vitaan_Application_Form_[YourName].pdf"{" "}
             </strong>
             and upload the signed copy to Upload file with{" "}
-            <strong>"Vitaan Docs"</strong> option selected from the dropdown to
+            <strong>"Applications"</strong> option selected from the dropdown to
             complete your submission.
           </p>
 

@@ -250,9 +250,8 @@ export default function FileDashboardPage() {
               <option value="vitaan_docs">Vitaan docs</option>
               <option value="smarika">Smarika</option>
               <option value="sarjana">Sarjana</option>
-              {/* <option value="magazine">Magazine</option>
-              <option value="general">General</option>
-              <option value="others">Others</option> */}
+              <option value="application">Applications</option>
+              <option value="others">Others</option>
             </select>
           </div>
         </div>

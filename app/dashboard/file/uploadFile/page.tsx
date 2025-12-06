@@ -95,6 +95,8 @@ export default function S3Uploader() {
         <option value="vitaan_docs">Vitaan Docs</option>
         <option value="smarika">Smarika</option>
         <option value="sarjana">Sarjana</option>
+        <option value="application">Applications</option>
+        <option value="others">Others</option>
         {/* <option value="general">general</option>
         <option value="others">Others</option> */}
       </select>
