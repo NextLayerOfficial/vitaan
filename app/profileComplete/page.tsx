@@ -52,7 +52,7 @@ export default function ProfilePage() {
       imageKey: "",
       graduationYear: undefined,
       department: "",
-      dateOfBirth: undefined,
+      dateOfBirth: "",
       phone: "",
       image: "",
       socials: { linkedin: "", instagram: "", facebook: "" },
