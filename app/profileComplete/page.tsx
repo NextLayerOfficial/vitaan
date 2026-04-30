@@ -52,7 +52,7 @@ export default function ProfilePage() {
       imageKey: "",
       graduationYear: undefined,
       department: "",
-      dateOfBirth: "",
+      dateOfBirth: undefined,
       phone: "",
       image: "",
       socials: { linkedin: "", instagram: "", facebook: "" },
@@ -220,7 +220,7 @@ export default function ProfilePage() {
               name="department"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Department</FormLabel>
+                  <FormLabel>Brance</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Your Branch" />
                   </FormControl>

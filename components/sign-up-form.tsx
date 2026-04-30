@@ -46,7 +46,7 @@ export default function SignUpForm() {
         password,
         name,
         username,
-        dateOfBirth: null,
+
         graduationYear: 0,
         address: "",
         department: "",
