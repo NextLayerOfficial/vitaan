@@ -24,6 +24,10 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: null,
       },
+      dateOfBirth: {
+        type: "string",
+        defaultValue: null,
+      },
       currentCompany: {
         type: "string",
         defaultValue: null,
@@ -111,7 +115,7 @@ export const auth = betterAuth({
     async afterEmailVerification(user: { email: any }, request: any) {
       return Response.redirect(
         `${process.env.BETTER_AUTH_URL}/profileComplete`,
-        302
+        302,
       );
     },
     sendOnSignUp: true,

@@ -30,10 +30,10 @@ model User {
   createdAt       DateTime
   updatedAt       DateTime
   status          String    @default("pending") // "pending", "approved", "rejected"
-
-  accounts Account[]
-  File     File[]
-  sessions Session[]
+  dateOfBirth     DateTime?
+  accounts        Account[]
+  File            File[]
+  sessions        Session[]
 
   @@map("user")
 }

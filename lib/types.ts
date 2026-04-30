@@ -12,6 +12,7 @@ export interface User {
   banExpires?: Date | null; // null if not banned
   graduationYear?: number;
   department?: string;
+  dateOfBirth?: Date | string | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   socials?: Record<string, any> | null; // or a more specific object type if known
   currentCompany?: string;

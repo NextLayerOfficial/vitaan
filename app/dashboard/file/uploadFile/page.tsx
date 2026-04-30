@@ -11,7 +11,7 @@ export default function S3Uploader() {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [url, setUrl] = useState<string | null>(null);
-  const [category, setCategory] = useState("document");
+  const [category, setCategory] = useState("vitaan_docs");
 
   const handleUpload = async () => {
     if (!file || !user?.id) {
@@ -97,8 +97,6 @@ export default function S3Uploader() {
         <option value="sarjana">Sarjana</option>
         <option value="application">Applications</option>
         <option value="others">Others</option>
-        {/* <option value="general">general</option>
-        <option value="others">Others</option> */}
       </select>
 
       {/* Upload button */}

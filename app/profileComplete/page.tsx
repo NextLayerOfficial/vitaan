@@ -28,6 +28,8 @@ const profileSchema = z.object({
     .max(new Date().getFullYear() + 5, "Too far in future"),
   department: z.string().min(1, "Department is required"),
   phone: z.string().regex(/^\d{10}$/, "Phone number must be exactly 10 digits"),
+  dateOfBirth: z.string().min(1, "Date of birth is required"),
+
   image: z.string().url("Profile image is required"),
   socials: z.object({
     linkedin: z.string().url("Invalid LinkedIn URL").optional(),
@@ -51,6 +53,7 @@ export default function ProfilePage() {
       imageKey: "",
       graduationYear: undefined,
       department: "",
+      dateOfBirth: "",
       phone: "",
       image: "",
       socials: { linkedin: "", instagram: "", facebook: "" },
@@ -69,6 +72,9 @@ export default function ProfilePage() {
           : undefined,
         department: user.department ?? "",
         phone: user.phone ?? "",
+        dateOfBirth: user.dateOfBirth
+          ? new Date(user.dateOfBirth).toISOString().split("T")[0]
+          : "",
         image: user.image ?? "",
         socials: {
           facebook: user.socials?.facebook ?? "",
@@ -154,6 +160,23 @@ export default function ProfilePage() {
 
             <FormField
               control={form.control}
+              name="dateOfBirth"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date of Birth</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="date"
+                      max={new Date().toISOString().split("T")[0]}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="address"
               render={({ field }) => (
                 <FormItem>
@@ -196,7 +219,7 @@ export default function ProfilePage() {
                 <FormItem>
                   <FormLabel>Department</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Your department" />
+                    <Input {...field} placeholder="Your Branch" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

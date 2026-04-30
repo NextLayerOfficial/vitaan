@@ -131,7 +131,7 @@ export default function AppSidebar({ user }: UserProps) {
             <SidebarMenuItem className="">
               <SidebarMenuButton>
                 <Link
-                  href="/dashboard/file/ApproveFiles"
+                  href="/dashboard/adminpage/ApproveFiles"
                   className="flex items-center gap-3"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
