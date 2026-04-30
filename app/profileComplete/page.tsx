@@ -52,7 +52,7 @@ export default function ProfilePage() {
       imageKey: "",
       graduationYear: undefined,
       department: "",
-      dateOfBirth: "",
+      dateOfBirth: undefined,
       phone: "",
       image: "",
       socials: { linkedin: "", instagram: "", facebook: "" },
@@ -73,7 +73,7 @@ export default function ProfilePage() {
         phone: user.phone ?? "",
         dateOfBirth: user.dateOfBirth
           ? new Date(user.dateOfBirth).toISOString().split("T")[0]
-          : "",
+          : undefined,
         image: user.image ?? "",
         socials: {
           facebook: user.socials?.facebook ?? "",
@@ -90,12 +90,15 @@ export default function ProfilePage() {
 
   const onSubmit = async (data: z.infer<typeof profileSchema>) => {
     if (!user) return alert("User not available");
-
+    const payload = {
+      ...data,
+      dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : null,
+    };
     try {
       const res = await fetch(`/api/firstTimeUser/${user.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) throw new Error("Failed to update profile");

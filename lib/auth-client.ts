@@ -18,7 +18,7 @@ export const authClient = createAuthClient({
           defaultValue: null,
         },
         dateOfBirth: {
-          type: "string",
+          type: "date",
           defaultValue: null,
           required: false, // 👈
         },
