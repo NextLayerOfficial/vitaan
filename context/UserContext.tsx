@@ -5,6 +5,7 @@ import { createContext, useContext } from "react";
 
 const UserContext = createContext<User | null>(null);
 
+
 export const UserProvider = ({
   user,
   children,
