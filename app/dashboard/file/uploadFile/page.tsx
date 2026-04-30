@@ -6,7 +6,7 @@ import { useUser } from "@/context/UserContext";
 import { toast } from "sonner";
 
 export default function S3Uploader() {
-  const user = useUser();
+  const { user } = useUser()!;
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);

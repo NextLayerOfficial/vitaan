@@ -13,7 +13,7 @@ interface DashboardClientProps {
 export default function DashboardClient({
   latestMagazines,
 }: DashboardClientProps) {
-  const user = useUser();
+  const { user } = useUser()!;
   const isAdmin = user?.role === "admin";
 
   const [isEditing, setIsEditing] = useState(false);

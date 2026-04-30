@@ -2,13 +2,13 @@
 
 import UserProfile from "@/components/userProfile";
 import { useUser } from "@/context/UserContext";
-// import { User } from "@/components/userProfile";
+
 import type { User } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ProfilePage() {
-  const user = useUser();
-  const [updatedUser, setupdatedUser] = useState(user);
+  const { user, setUser } = useUser()!;
+
   useEffect(() => {
     if (!user) {
       console.error("User data is not available");
@@ -27,14 +27,14 @@ export default function ProfilePage() {
     });
 
     const data = await res.json();
-    setupdatedUser(data);
+    setUser(data); // 👈 updates context instead of local state
   };
 
   return (
     <main className=" mx-auto mt-10 space-y-4">
-      {updatedUser && (
+      {user && (
         <UserProfile
-          user={updatedUser}
+          user={user!}
           isEditable={false}
           EditingRights={true}
           onSave={handleSave}

@@ -29,7 +29,6 @@ const profileSchema = z.object({
   department: z.string().min(1, "Department is required"),
   phone: z.string().regex(/^\d{10}$/, "Phone number must be exactly 10 digits"),
   dateOfBirth: z.string().min(1, "Date of birth is required"),
-
   image: z.string().url("Profile image is required"),
   socials: z.object({
     linkedin: z.string().url("Invalid LinkedIn URL").optional(),
@@ -42,7 +41,7 @@ const profileSchema = z.object({
 });
 
 export default function ProfilePage() {
-  const user = useUser();
+  const { user, setUser } = useUser()!;
   const [imageUrl, setImageUrl] = useState<string | undefined>();
 
   const router = useRouter();
@@ -100,7 +99,8 @@ export default function ProfilePage() {
       });
 
       if (!res.ok) throw new Error("Failed to update profile");
-
+      const updated = await res.json(); // 👈
+      setUser(updated);
       toast.success("Profile updated successfully!");
       setTimeout(() => router.push("/dashboard/profile"), 1500);
     } catch (err) {
