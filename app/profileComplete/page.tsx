@@ -220,7 +220,7 @@ export default function ProfilePage() {
               name="department"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Department</FormLabel>
+                  <FormLabel>Brance</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Your Branch" />
                   </FormControl>
