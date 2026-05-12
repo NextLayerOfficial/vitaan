@@ -24,13 +24,7 @@ const galleryImages = [
   "https://lh3.googleusercontent.com/pw/AP1GczOjS36ds4h-fWttzh_oXGQdMOU4t80x1YauMpEs-VjjBCPa0t7qbj-5YmgvEk-wKXjmcjQRE1UtfoWduut9C1-_ro41eussvFlTyfU6et448qJX8dNrOmhFzDPX-QFMkBbV6apr9Ev4XoKqUR8q9Ee0jg=w1167-h878-s-no-gm?authuser=0",
   "https://lh3.googleusercontent.com/pw/AP1GczPy3aWIfqQ5Sb9cGW-ni4RiuE8RG4XH321p2SU9iacjQ6jPnrnA_tXwa81NOgnBKMbUFUmUOjyzTaBSFpTAonFS3sWrG7Qout_iU2ffPlHvgx1rj5505-kfm5G2PBrih6nQWUdmryhctQbYzXpNBLc-4g=w1169-h878-s-no-gm?authuser=0",
   "https://lh3.googleusercontent.com/pw/AP1GczPJ9nzhiedQ0rVFBCSctgbMDyWe0MXitq3wyupJ6OhZ0tvsiXLXKGD0i5fWZoBNpxZo-52IKByBbvUx_R4N-cXjbstyYRF-OCKvrNDUDfxVGYojjDSNve5tZpB25UHz11onnx7BU1Uhe1WnvfjJSHHA4A=w1173-h878-s-no-gm?authuser=0",
-  // "/india.png",
-  // "/india.png",
-  // "/india.png",
-  // "/india.png",
-  // "/india.png",
-  // "/india.png",
-  // "/india.png",
+  
 ];
 
 // Data for the sections remains the same.
@@ -117,7 +111,7 @@ export default function Home() {
                   </p>
                   <p>
                     यह केवल एक पूर्व छात्र समूह नहीं, अपितु अतीत और वर्तमान के
-                    बीच एक सेतु का कार्य करता है जो नई पीढ़ी की सृजनात्मक शक्ति
+                    बीच एक सेतु का कार्य करता है जो नई पीढ़ी की सर्जनात्मक शक्ति
                     को अनुभवी कलमों से जोड़ता है। सर्जना ने जहाँ साहित्य के बीज
                     बोए, वहीं वितान उन बीजों से पल्लवित वृक्षों की छाया है, जो
                     देश-विदेश में अपनी जड़ें जमा चुकी हैं।
@@ -136,7 +130,7 @@ export default function Home() {
                 हमारे मुख्य कार्य
               </h2>
               <p className="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">
-                साहित्यिक चेतना के विस्तार और सृजनात्मक अभिव्यक्ति को मंच प्रदान
+                साहित्यिक चेतना के विस्तार और सर्जनात्मक अभिव्यक्ति को मंच प्रदान
                 करने के हमारे प्रयास।
               </p>
               <div className="w-24 h-1 bg-amber-600 mx-auto mt-6 mb-16"></div>
