@@ -31,9 +31,21 @@ const profileSchema = z.object({
   dateOfBirth: z.string().min(1, "Date of birth is required"),
   image: z.string().url("Profile image is required"),
   socials: z.object({
-    linkedin: z.string().url("Invalid LinkedIn URL").optional(),
-    instagram: z.string().url("Invalid Instagram URL").optional(),
-    facebook: z.string().url("Invalid Facebook URL").optional(),
+    linkedin: z
+      .string()
+      .url("Invalid LinkedIn URL")
+      .optional()
+      .or(z.literal("")),
+    instagram: z
+      .string()
+      .url("Invalid Instagram URL")
+      .optional()
+      .or(z.literal("")),
+    facebook: z
+      .string()
+      .url("Invalid Facebook URL")
+      .optional()
+      .or(z.literal("")),
   }),
   imageKey: z.string().optional(),
   currentCompany: z.string().min(1, "Current company is required"),
